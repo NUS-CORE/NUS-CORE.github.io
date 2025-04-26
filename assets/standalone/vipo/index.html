@@ -60,14 +60,14 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="https://openreview.net/profile?id=~Xuyang_Chen1" target="_blank">Xuyang
+                <a href="https://scholar.google.com/citations?user=n7GqLNQAAAAJ&hl=en" target="_blank">Xuyang
                   Chen</a>,</span>
               <span class="author-block">
-                <a href="https://openreview.net/profile?id=~Guojian_Wang2" target="_blank">Guojian Wang</a>,</span>
+                <a href="https://scholar.google.com/citations?user=Z5qL0VEAAAAJ&hl=en" target="_blank">Guojian Wang</a>,</span>
               <span class="author-block">
-                <a href="https://openreview.net/profile?id=~Yan_Keyu1" target="_blank">Yan Keyu</a>,</span>
+                <a href="https://scholar.google.com/citations?user=O2PfYoUAAAAJ&hl=en" target="_blank">Keyu Yan</a>,</span>
               <span class="author-block">
-                <a href="https://openreview.net/profile?id=~Lin_Zhao3" target="_blank">Zhao Lin</a><sup>†</sup>
+                <a href="https://scholar.google.com/citations?user=091lFhYAAAAJ&hl=en" target="_blank">Lin Zhao</a><sup>†</sup>
               </span>
             </div>
 
@@ -153,14 +153,18 @@
     </div>
   </section>
   <!-- End paper abstract -->
+
+
 <div>
   <!-- 空行 -->
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
 </div>
+
+
   <!-- Teaser image -->
-  <section class="hero teaser">
+  <section class="hero ">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <h2 class="title is-3 has-text-centered">Method</h2>
@@ -174,20 +178,22 @@
           
           <p>We subsequently derive the analytical expression of its gradient, which forms the foundation for model training:</p>
   
-          $$
-          \begin{aligned}
-          \nabla_\theta \mathcal{L}_{aug}(\theta) &= \nabla_\theta \mathcal{L}_{ori}(\theta) - 2\lambda \, \mathbb{E}_{s\sim\rho_0,\, s'\sim d_\theta^\mu,\, a\sim\mu,\,(s', r)\sim P_\theta}
-           \bigg[ (V^\mu_d(s) - V^\mu_m(s)) \cdot (r + \gamma V^\mu_m(s')) \, \nabla_\theta \log P_\theta(s', r \mid s, a) \bigg].
-          \end{aligned}
-          $$
+          <div
+          style="width: 100%; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+          <img src="static/images/update.svg" alt="delta" style="width: 100%; max-width: 100%;">
+        </div>
+          
   
   
           We can see the mean value of Value functions from the model and the dataset are aligned well after several training steps:</p>
           <div
           style="width: 100%; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-          <img src="static/images/diff.svg" alt="delta" style="width: 100%; max-width: 33%;">
-          <img src="static/images/vd.svg" alt="Vd" style="width: 100%; max-width: 33%;">
-          <img src="static/images/vm.svg" alt="Vm" style="width: 100%; max-width: 33%;">
+          <img src="static/images/v.png" alt="delta" style="width: 100%; max-width: 100%;">
+        </div>
+        <div class="has-text-centered"> 
+          *(a) Evolution of Value Function Inconsistency During Model Training. <br>
+          *(b) Evolution of Value Function learned from dataset. <br>
+          *(c) Evolution of Value Function learned from model-based evaluation.
         </div>
         </div>
       </div>
