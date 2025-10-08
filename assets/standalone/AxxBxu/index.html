@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="description"
-    content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller / AudioX: Diffusion Transformer for Anything-to-Audio Generation">
+    content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller">
   <meta name="keywords"
     content="Multi-agent Navigation; Distributed safe control; Hamilton-Jacobian-Bellman; Control barrier function; Graph neural networks">
   <meta property="og:title" content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller" />
@@ -248,7 +248,8 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <!-- Arxiv PDF link -->
-                <span class="link-block">
+
+                <!-- <span class="link-block">
                   <a href="static/pdfs/MARS_IROS_Workshop.pdf" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -256,7 +257,7 @@
                     </span>
                     <span>Workshop paper</span>
                   </a>
-                </span>
+                </span> -->
 
                 <!-- Supplementary PDF link -->
                 <!-- <span class="link-block">
@@ -269,16 +270,7 @@
                     </a>
                   </span> -->
 
-                <!-- Github link -->
-                <span class="link-block">
-                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code - Coming soon</span>
-                  </a>
-                </span>
+
 
                 <!-- ArXiv abstract Link -->
                 <span class="link-block">
@@ -287,9 +279,23 @@
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
-                    <span>Full paper - Coming soon (arXiv)</span>
+                    <span>Preprint paper - coming soon (arXiv)</span>
                   </a>
                 </span>
+
+                
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/BG5CPU/AxxBxu.test" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+
               </div>
             </div>
           </div>
@@ -313,7 +319,8 @@
   </div>
 </section> -->
   <!-- Fig1 -->
-  <section class="hero teaser">
+
+  <!-- <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <p>
@@ -331,7 +338,8 @@
         </p>
       </div>
     </div>
-  </section>
+  </section> -->
+
   <!-- End teaser video -->
 
   <!-- Paper abstract -->
@@ -342,7 +350,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-             This paper proposes a direct data-driven controller
+            This paper proposes a direct data-driven controller
             design approach for nonlinear systems based on their state 
             dependent representation. We regard this representation as a
             form of state-dependent parameter-varying model, which allows
@@ -357,7 +365,7 @@
             and our proposed direct data-driven controller ensures local
             stability for all nonlinear systems whose coefficients are consistent
             with the data. Based solely on data, we rigorously characterize
-            the closed-loop system’s robustness against disturbances and
+            the closed-loop system's robustness against disturbances and
             its region of attraction under input saturation. The theoretical
             results are validated through numerical examples and physical
             experiment.
@@ -370,221 +378,157 @@
   <!-- End paper abstract -->
 
 
-
-
-
-
-
-
   <!-- Video carousel -->
   <section class="hero is-small">
     <div class="hero-body">
       <div class="container">
 
-        <h2 class="title is-3">Docking Mechanism Experiments</h2>
-        <!-- 111docking -->
-        <div class="task-section" style="margin-bottom: 36px;">
+      <!-- Video-to-Audio Generation -->
+      <div class="task-section" style="margin-bottom: 36px;">
 
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;"> </h2>
+        
+        
+      <!-- Video-to-Audio Generation -->
+      <div class="task-section" style="margin-bottom: 36px;">
 
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/passive_locking.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Passive detection-free locking
-              </div>
-            </div>
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Experimental Data Collection</h2>
 
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/activate_separation.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Active repulsion-based separation
-              </div>
-            </div>
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/locking_strength.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Pendulum test evaluates docked connection strength
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ok -->
-
-        <!-- Main point hardware -->
-        <h2 class="title is-3">Real-world Experiments</h2>
-        <!-- docking -->
-        <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Mid-air docking</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/docking_com_ours.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Smooth docking with
-                minimal disturbance (Ours)
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/docking_comparison.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Large post-docking
-                position oscillation [1]
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/docking_comparison2.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Large post-docking
-                position oscillation [2]
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ok -->
-        <!--separate-->
-        <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Active
-            repulsion-based separation</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/separation_com_ours.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">(a) Minimizing attitude change
-                and enhancing safety and robustness (Ours)</div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/separation_comparison.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">(b) Significant attitude and
-                position oscillations during separation [3]</div>
+        <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
+          <!-- video 1 + text -->
+          <div class="sample-item">
+            <video autoplay muted loop controls>
+              <source src="static/videos/data_collection.mp4" type="video/mp4">
+            </video>
+            <!-- Stable continuous flight at 1 m/s -->
+            <div class="has-text-centered" style="margin-top: 6px">
+              Apply the experimental input data \(u_d\), and collect the state data \(x_d\).
+              <br> 
+              The system may be affected by platform friction, sensor noise, motor nonlinearities, and aerodynamic disturbances.
+              <br>
+              The data are then used for controller synthesis.
             </div>
           </div>
         </div>
       </div>
       <!-- ok -->
-      <!-- other -->
+
+
+
+
       <!-- Video-to-Audio Generation -->
       <div class="task-section" style="margin-bottom: 36px;">
 
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Trajectory tracking</h2>
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Controller Implementation A</h2>
 
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
           <!-- video 1 + text -->
           <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
             <video autoplay muted loop controls>
-              <source src="static/videos/circular_trajectory.mp4" type="video/mp4">
+              <source src="static/videos/ctrl_imp_A.mp4" type="video/mp4">
             </video>
             <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px">Circular trajectory: stable continuous flight at 1 m/s</div>
+            <div class="has-text-centered" style="margin-top: 6px">
+              The controller is synthesized from the collected experimental data. 
+              <br> 
+              The initial state is close to the origion.
+            </div>
           </div>
+        </div>
+      </div>
+
+
+      <!-- Video-to-Audio Generation -->
+      <div class="task-section" style="margin-bottom: 36px;">
+
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Controller Implementation B</h2>
+
+        <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
+          <!-- video 1 + text -->
           <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
             <video autoplay muted loop controls>
-              <source src="static/videos/agile_trajectory.mp4" type="video/mp4">
+              <source src="static/videos/ctrl_imp_B.mp4" type="video/mp4">
             </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">Agile trajectory: robust performance under agile, high-speed
-              flight</div>
+            <!-- Stable continuous flight at 1 m/s -->
+            <div class="has-text-centered" style="margin-top: 6px">
+              The controller is synthesized from the collected experimental data. 
+              <br> 
+              The initial state is far away from the origion.
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- ok -->
-    <!-- Video-to-Audio Generation -->
-    <div class="task-section" style="margin-bottom: 36px;">
 
-      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Collision-free
-        trajectory tracking</h2>
 
-      <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
-        <!-- video 1 + text -->
-        <div class="sample-item">
-          <video autoplay muted loop controls>
-            <source src="static/videos/collision_free.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px">MARS accurately follows the collision-free
-            trajectories from our previous work [4]</div>
+      <!-- Video-to-Audio Generation -->
+      <div class="task-section" style="margin-bottom: 36px;">
+
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Controller Implementation C</h2>
+
+        <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
+          <!-- video 1 + text -->
+          <div class="sample-item">
+            <video autoplay muted loop controls>
+              <source src="static/videos/ctrl_imp_C.mp4" type="video/mp4">
+            </video>
+            <!-- Stable continuous flight at 1 m/s -->
+            <div class="has-text-centered" style="margin-top: 6px">
+              The controller is synthesized from the collected experimental data. 
+              <br> 
+              The initial state is far away from the origion.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- ok -->
 
 
-    <!-- Video-to-Audio Generation -->
-    <div class="task-section" style="margin-bottom: 36px;">
+      <!-- Video-to-Audio Generation -->
+      <div class="task-section" style="margin-bottom: 36px;">
 
-      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Full docking–separation process</h2>
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Controller Implementation D</h2>
 
-      <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-        <!-- video 1 + text -->
-        <div class="sample-item">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/docking.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px"> (a) Docking </div>
-        </div>
-        <!-- video 2 + text -->
-        <div class="sample-item">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/Separation.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px"> (b) Separation </div>
+        <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
+          <!-- video 1 + text -->
+          <div class="sample-item">
+            <video autoplay muted loop controls>
+              <source src="static/videos/ctrl_imp_D.mp4" type="video/mp4">
+            </video>
+            <!-- Stable continuous flight at 1 m/s -->
+            <div class="has-text-centered" style="margin-top: 6px">
+              The controller is synthesized from the collected experimental data.
+              <br> 
+              We intentionally perturb the quadrotor with a stick while the controller is running.
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
     </div>
   </section>
   <!-- End video carousel -->
 
-  <section class="section">
+
+
+
+
+
+
+
+
+  <!-- <section class="section">
     <div class="container is-max-desktop">
-
-      <!-- Main point hardware -->
       <div class="column">
-
       </div>
-    </div>
-
-
+    </div> -->
 
     <!-- Paper poster -->
-    <section class="hero is-small is-light">
+    <!-- <section class="hero is-small is-light">
       <div class="hero-body">
         <div class="container">
           <h2 class="title">Poster</h2>
@@ -594,12 +538,12 @@
 
         </div>
       </div>
-    </section>
+    </section> -->
     <!--End paper poster -->
 
 
     <!--BibTex citation -->
-    <section class="section" id="BibTeX">
+    <!-- <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
         <p>
@@ -621,8 +565,10 @@
         [3]Saldana, David, Parakh M. Gupta, and Vijay Kumar. "Design and control of aerial modules for inflight self-disassembly." IEEE Robotics and Automation Letters 4, no. 4 (2019): 3410-3417.
         <br>
         [4] Huang, Rui, Zhenyu Zhang, Siyu Tang, Zhiqian Cai, and Lin Zhao. "Robust Fault-Tolerant Control and Agile Trajectory Planning for Modular Aerial Robotic Systems." In 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). arXiv preprint arXiv:2503.09351 (2025).
-      </div>
-    </section>
+      </div> -->
+
+    <!-- </section> -->
+
     <!--End BibTex citation -->
 
 
@@ -635,7 +581,7 @@
               <p>
                 This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
                   target="_blank">Academic Project Page Template</a>
-                which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
                 You are free to borrow the source code of this website, we just ask that you link back to this page in
                 the footer. <br> This website is licensed under a <a rel="license"
                   href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
