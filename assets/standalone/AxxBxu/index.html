@@ -9,11 +9,11 @@
     content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller / AudioX: Diffusion Transformer for Anything-to-Audio Generation">
   <meta name="keywords"
     content="Multi-agent Navigation; Distributed safe control; Hamilton-Jacobian-Bellman; Control barrier function; Graph neural networks">
-  <meta property="og:title" content="MARS-AR: Enabling Agile and Robust Flight in Modular Aerial Robot Systems" />
-  <meta property="og:description" content="MARS-AR: Enabling Agile and Robust Flight in Modular Aerial Robot Systems" />
+  <meta property="og:title" content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller" />
+  <meta property="og:description" content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller" />
   <meta property="og:url" content="URL OF THE WEBSITE" />
-  <meta name="twitter:title" content="MARS-AR: Enabling Agile and Robust Flight in Modular Aerial Robot Systems">
-  <meta name="twitter:description" content="MARS-AR: Enabling Agile and Robust Flight in Modular Aerial Robot Systems">
+  <meta name="twitter:title" content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller">
+  <meta name="twitter:description" content="Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller">
 
   <title>Nonlinear System with State-Dependent Representation: Model-Based and Direct Data-Driven Controller</title>
   <link rel="icon" type="image/x-icon" href="static/images/CI_LOGO.ico">
@@ -342,21 +342,25 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Modular Aerial Robot Systems (MARS), composed of multiple self-reconfigurable drone units,
-              offer high adaptability to diverse mission scenarios and fault conditions. Existing docking mechanism
-              designs for MARS are prone to significant oscillations during docking and separation. Moreover, their
-              control systems are conservative and sensitive to disturbances, which only allow quasi-static hovering
-              flight and waypoint-based flight. To address these disadvantages, we first develop a highly integrated
-              mechanical system that significantly simplifies passive docking, detection-free passive locking, and
-              active separation by using a single servo motor. Our experimental results demonstrate substantial
-              improvements in smooth and stable docking and separation performance. To fully unleash the redundant
-              control actuation of MARS, we further propose an equivalent modeling framework that abstracts arbitrary
-              MARS configurations into a unified virtual quadrotor representation. Building on this abstraction, we
-              design and implement a model predictive control algorithm for MARS of arbitrary configurations. Moreover,
-              we develop efficient algorithms to map the virtual thrust and torque control commands to those of
-              individual units.
-              To the best of our knowledge, this work presents the first real-world demonstrations of agile trajectory
-              tracking and obstacle avoidance with active yaw angle control for MARS.
+             This paper proposes a direct data-driven controller
+            design approach for nonlinear systems based on their state 
+            dependent representation. We regard this representation as a
+            form of state-dependent parameter-varying model, which allows
+            us to derive new model-based conditions for nonlinear system
+            control. The closed-loop properties are analyzed in terms of
+            the robustness against disturbances and the region of attraction
+            under input saturation. The model-based conditions are then
+            adapted to the data-driven case, where a library of known basis
+            functions is assumed, and the state-dependent representation
+            takes the form of a linear combination of them, with unknown
+            coefficients. Noisy experimental data introduces uncertainties,
+            and our proposed direct data-driven controller ensures local
+            stability for all nonlinear systems whose coefficients are consistent
+            with the data. Based solely on data, we rigorously characterize
+            the closed-loop system’s robustness against disturbances and
+            its region of attraction under input saturation. The theoretical
+            results are validated through numerical examples and physical
+            experiment.
             </p>
           </div>
         </div>
