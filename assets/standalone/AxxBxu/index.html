@@ -350,25 +350,19 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-            This paper proposes a direct data-driven controller
-            design approach for nonlinear systems based on their state 
-            dependent representation. We regard this representation as a
-            form of state-dependent parameter-varying model, which allows
-            us to derive new model-based conditions for nonlinear system
-            control. The closed-loop properties are analyzed in terms of
-            the robustness against disturbances and the region of attraction
-            under input saturation. The model-based conditions are then
-            adapted to the data-driven case, where a library of known basis
-            functions is assumed, and the state-dependent representation
-            takes the form of a linear combination of them, with unknown
-            coefficients. Noisy experimental data introduces uncertainties,
-            and our proposed direct data-driven controller ensures local
-            stability for all nonlinear systems whose coefficients are consistent
-            with the data. Based solely on data, we rigorously characterize
-            the closed-loop system's robustness against disturbances and
-            its region of attraction under input saturation. The theoretical
-            results are validated through numerical examples and physical
-            experiment.
+              This project presents a novel framework for stabilizing nonlinear systems represented in state-dependent form. 
+              We first reformulate the nonlinear dynamics as a state-dependent parameter-varying model 
+              and synthesize a stabilizing controller offline via tractable linear matrix inequalities (LMIs). 
+              The resulting controller guarantees local exponential stability, 
+              maintains robustness against disturbances, 
+              and provides an estimate of the region of attraction under input saturation. 
+              We then extend the formulation to the direct data-driven setting, 
+              where a known library of basis functions represents the dynamics with unknown coefficients consistent with noisy experimental data. 
+              By leveraging Petersen’s lemma, 
+              we derive data-dependent LMIs that ensure stability and robustness for all systems compatible with the data. 
+              Numerical and physical experimental results validate that 
+              our approach achieves rigorous end-to-end guarantees on stability, robustness, and safety directly from finite data 
+              without explicit model identification.
             </p>
           </div>
         </div>
