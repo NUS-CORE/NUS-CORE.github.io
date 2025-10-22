@@ -352,19 +352,7 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Modular Aerial Robot Systems (MARS), composed of multiple self-reconfigurable drone units,
-              offer high adaptability to diverse mission scenarios and fault conditions. Existing docking mechanism
-              designs for MARS are prone to significant oscillations during docking and separation. Moreover, their
-              control systems are conservative and sensitive to disturbances, which only allow quasi-static hovering
-              flight and waypoint-based flight. To address these disadvantages, we first develop a highly integrated
-              mechanical system that significantly simplifies passive docking, detection-free passive locking, and
-              active separation by using a single servo motor. Our experimental results demonstrate substantial
-              improvements in smooth and stable docking and separation performance. To fully unleash the redundant
-              control actuation of MARS, we further propose an equivalent modeling framework that abstracts arbitrary
-              MARS configurations into a unified virtual quadrotor representation. Building on this abstraction, we
-              design and implement a model predictive control algorithm for MARS of arbitrary configurations. Moreover,
-              we develop efficient algorithms to map the virtual thrust and torque control commands to those of
-              individual units.
+              Modular Aerial Robot Systems (MARS) consist of multiple drone units that can self-reconfigure to adapt to various mission requirements and fault conditions. However, existing fault-tolerant control methods exhibit significant oscillations during docking and separation, impacting system stability. To address this issue, we propose a novel fault-tolerant control reallocation method that adapts to an arbitrary number of modular robots and their assembly formations. The algorithm redistributes the expected collective force and torque required for MARS to individual units according to their moment arm relative to the center of MARS mass. Furthermore, we propose an agile trajectory planning method for MARS of arbitrary configurations, which is collision-avoiding and dynamically feasible. Our work represents the first comprehensive approach to enable fault-tolerant and collision avoidance flight for MARS. We validate our method through extensive simulations, demonstrating improved fault tolerance, enhanced trajectory tracking accuracy, and greater robustness in cluttered environments. The videos and source code of this work are available at https://github.com/RuiHuangNUS/MARS-FTCP/
             </p>
           </div>
         </div>
