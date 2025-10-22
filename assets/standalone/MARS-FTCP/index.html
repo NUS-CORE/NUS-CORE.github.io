@@ -357,152 +357,41 @@
   </section>
   <!-- End paper abstract -->
 
+  <section class="hero is-small">
+    <div class="task-section" style="margin-bottom: 30px;">
+
+      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Simulation in CoppelisSim: collision-free
+        trajectory tracking</h2>
+
+      <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
+        <!-- video 1 + text -->
+        <div class="sample-item">
+          <img src="static/images/collision_free_4x1_3.gif" alt="Learning from model weights" class="blend-img-background center-image"
+            style="max-width: 100%; height: auto;" />
+          <!-- Stable continuous flight at 1 m/s -->
+          <div class="has-text-centered" style="margin-top: 6px">Fault in No.3 of 4×1 Assembly</div>
+        </div>
+
+        <div class="sample-item">
+        <img src="static/images/collision_free_4x1_4.gif" alt="Learning from model weights" class="blend-img-background center-image"
+          style="max-width: 100%; height: auto;" />
+        <!-- Stable continuous flight at 1 m/s -->
+        <div class="has-text-centered" style="margin-top: 6px">Fault in No.4 of 4×1 Assembly</div>
+        </div>
+
+        <div class="sample-item">
+        <img src="static/images/collision_free_3x2_2.gif" alt="Learning from model weights" class="blend-img-background center-image"
+          style="max-width: 100%; height: auto;" />
+        <!-- Stable continuous flight at 1 m/s -->
+        <div class="has-text-centered" style="margin-top: 6px">Fault in No.2 of 3×2 Assembly</div>
+        </div>
+
+      </div>
+    </div>    
+  </section>
+
   <!-- Video carousel -->
   <section class="hero is-small">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title is-3">Docking Mechanism Experiments</h2>
-        <!-- 111docking -->
-        <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;"> </h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/passive_locking.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Passive detection-free locking
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/activate_separation.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Active repulsion-based separation
-              </div>
-            </div>
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/locking_strength.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Pendulum test evaluates docked connection strength
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ok -->
-
-        <!-- Main point hardware -->
-        <h2 class="title is-3">Real-world Experiments</h2>
-        <!-- docking -->
-        <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Mid-air docking</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/docking_com_ours.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Smooth docking with
-                minimal disturbance (Ours)
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/docking_comparison.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Large post-docking
-                position oscillation [1]
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/docking_comparison2.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Large post-docking
-                position oscillation [2]
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ok -->
-        <!--separate-->
-        <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Active
-            repulsion-based separation</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/separation_com_ours.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">(a) Minimizing attitude change
-                and enhancing safety and robustness (Ours)</div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/separation_comparison.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">(b) Significant attitude and
-                position oscillations during separation [3]</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ok -->
-      <!-- other -->
-      <!-- Video-to-Audio Generation -->
-      <div class="task-section" style="margin-bottom: 36px;">
-
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Trajectory tracking</h2>
-
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-          <!-- video 1 + text -->
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/circular_trajectory.mp4" type="video/mp4">
-            </video>
-            <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px">Circular trajectory: stable continuous flight at 1 m/s</div>
-          </div>
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_trajectory.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">Agile trajectory: robust performance under agile, high-speed
-              flight</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- ok -->
-    <!-- Video-to-Audio Generation -->
     <div class="task-section" style="margin-bottom: 36px;">
 
       <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Collision-free
@@ -519,10 +408,7 @@
             trajectories from our previous work [4]</div>
         </div>
       </div>
-    </div>
-    <!-- ok -->
-
-     
+    </div>    
   </section>
   <!-- End video carousel -->
 
