@@ -211,8 +211,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MARS<sup>2</sup>: Agile and Robust Flight Control of Modular Aerial
-              Robot Systems</h1>
+            <h1 class="title is-1 publication-title">MARS-FTCP: Robust Fault-Tolerant Control and Agile Trajectory Planning for Modular Aerial Robot Systems</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <!-- <span class="author-block">
@@ -232,9 +231,6 @@
               </span>
               <span class="author-block">
                 Siyu Tang,
-              </span>
-              <span class="author-block">
-                Jialin Zhang,
               </span>
               <span class="author-block">
                 Zhenyu Zhang,
@@ -258,7 +254,7 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <!-- Arxiv PDF link -->
-                <span class="link-block">
+                <!-- <span class="link-block">
                   <a href="static/pdfs/MARS_IROS_Workshop.pdf" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -266,7 +262,7 @@
                     </span>
                     <span>Workshop paper</span>
                   </a>
-                </span>
+                </span> -->
 
                 <!-- Supplementary PDF link -->
                 <!-- <span class="link-block">
@@ -281,23 +277,23 @@
 
                 <!-- Github link -->
                 <span class="link-block">
-                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                  <a href="https://github.com/RuiHuangNUS/MARS-FTCP" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code - Coming soon</span>
+                    <span>Code</span>
                   </a>
                 </span>
 
                 <!-- ArXiv abstract Link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  <a href="https://arxiv.org/abs/2503.09351" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
-                    <span>Full paper - Coming soon (arXiv)</span>
+                    <span>arXiv</span>
                   </a>
                 </span>
               </div>
@@ -365,110 +361,6 @@
   <section class="hero is-small">
     <div class="hero-body">
       <div class="container">
-
-        <h2 class="title is-3">Simulation in gazebo</h2>
-        <!-- 111docking -->
-        <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Trajectory Tracking</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/2x1.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) 2 x 1 
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/1x1x2.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) 1 x 1 x 2
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/trans_2L.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) L-shaped transportation with 2 units
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/3x1.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (d) 3 x 1
-              </div>
-            </div>
-
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/trans_2x1.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (e) 2 x 1 transportation
-              </div>
-            </div>
-
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/3L.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (f) L-shape
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="task-section" style="margin-bottom: 36px;">
-          
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Agile flight</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/agile_45.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Pitch: 45 deg
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/agile_75.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Pitch: 60 deg
-              </div>
-            </div>
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/45_agile_roll.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Roll: 45 deg
-              </div>
-            </div>
-          </div>
-        </div>
-
         <h2 class="title is-3">Docking Mechanism Experiments</h2>
         <!-- 111docking -->
         <div class="task-section" style="margin-bottom: 36px;">
@@ -630,108 +522,7 @@
     </div>
     <!-- ok -->
 
-     <div class="task-section" style="margin-bottom: 36px;">
-
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Agile trajectory tracking</h2>
-
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-          <!-- video 1 + text -->
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_20deg.mp4" type="video/mp4">
-            </video>
-            <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px">(a) Pitch: 20 deg</div>
-          </div>
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_30deg.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">(b) Pitch: 30 deg</div>
-          </div>
-
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_40deg.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">(c) Pitch: 40 deg</div>
-          </div>
-
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_20deg_roll.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">(d) Roll: 20 deg</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="task-section" style="margin-bottom: 36px;">
-
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Object transportation</h2>
-
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-          <!-- video 1 + text -->
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/trans.mp4" type="video/mp4">
-            </video>
-            <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px"> (a) Cooperative transportation with a 40 cm basket </div>
-          </div>
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/trans_ball.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px"> (b) Transportation with a sloshing load (basketball) </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Video-to-Audio Generation -->
-    <div class="task-section" style="margin-bottom: 36px;">
-
-      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Full docking–separation process</h2>
-
-      <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-        <!-- video 1 + text -->
-        <div class="sample-item">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/docking.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px"> (a) Docking </div>
-        </div>
-        <!-- video 2 + text -->
-        <div class="sample-item">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/Separation.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px"> (b) Separation </div>
-        </div>
-      </div>
-    </div>
+     
   </section>
   <!-- End video carousel -->
 
@@ -752,7 +543,7 @@
         <div class="container">
           <h2 class="title">Poster</h2>
 
-          <iframe src="static/pdfs/Poster_MARS2_compressed.pdf" width="100%" height="550">
+          <iframe src="static/pdfs/IROS2025_poster_MARS.pdf" width="100%" height="550">
           </iframe>
 
         </div>
@@ -774,7 +565,7 @@
           year={2025}
         }</code></pre>
       </div>
-      <div class="container is-max-desktop content">
+      <!-- <div class="container is-max-desktop content">
         <h2 class="title">References</h2>
         <p>
         [1] Saldana, David, Bruno Gabrich, Guanrui Li, Mark Yim, and Vijay Kumar. "Modquad: The flying modular structure that self-assembles in midair." In 2018 IEEE international conference on robotics and automation (ICRA), pp. 691-698. IEEE, 2018.
@@ -784,7 +575,7 @@
         [3] Saldana, David, Parakh M. Gupta, and Vijay Kumar. "Design and control of aerial modules for inflight self-disassembly." IEEE Robotics and Automation Letters 4, no. 4 (2019): 3410-3417.
         <br>
         [4] Rui Huang, Zhenyu Zhang, Siyu Tang, Zhiqian Cai, and Lin Zhao. "Robust Fault-Tolerant Control and Agile Trajectory Planning for Modular Aerial Robotic Systems." In 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). arXiv preprint arXiv:2503.09351 (2025).
-      </div>
+      </div> -->
       
       <div class="container is-max-desktop content">
         <h2 class="title">Our related works</h2>
