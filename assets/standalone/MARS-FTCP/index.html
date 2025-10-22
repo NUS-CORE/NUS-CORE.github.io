@@ -304,22 +304,8 @@
   </section>
 
 
-  <!-- Teaser video-->
-  <!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
-  </div>
-</section> -->
   <!-- Fig1 -->
-  <section class="hero teaser">
+  <!-- <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <p>
@@ -337,7 +323,7 @@
         </p>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- End teaser video -->
 
   <!-- Paper abstract -->
@@ -360,29 +346,48 @@
   <section class="hero is-small">
     <div class="task-section" style="margin-bottom: 30px;">
 
+      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Fault-Tolerant Control</h2>
+
+      <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
+        <!-- video 1 + text -->
+        <div class="sample-item" style="display: flex; flex-direction: column; align-items: center;">
+        <img src="static/images/FT.gif" alt="Learning from model weights" class="blend-img-background center-image"
+          style="max-width: 100%; height: auto;" />
+          <div class="has-text-centered" style="margin-top: 6px">The baseline PID controller illustrates the ideal trajectories for MARS operations under normal conditions. Fault simulations reveal the significant impact of various failures. In contrast, our fault-tolerant controller demonstrates remarkable resilience, maintaining stability and precise trajectory tracking even under multiple faulty scenarios. These results confirm the adaptability of our method, ensuring both safety and reliability across a wide range of failure conditions.
+          </div>
+        </div>
+
+        <div class="sample-item" style="display: flex; flex-direction: column; align-items: center;">
+        <img src="static/images/FT_flight.gif" alt="Learning from model weights" class="blend-img-background center-image"
+          style="max-width: 100%; height: auto;" />
+          <div class="has-text-centered" style="margin-top: 6px">Fault-Tolerant Control During Flight  </div>
+        </div>
+    </div>    
+  </section>
+
+  <section class="hero is-small">
+    <div class="task-section" style="margin-bottom: 30px;">
+
       <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Simulation in CoppelisSim: collision-free
         trajectory tracking</h2>
 
       <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
         <!-- video 1 + text -->
-        <div class="sample-item">
-          <img src="static/images/collision_free_4x1_3.gif" alt="Learning from model weights" class="blend-img-background center-image"
-            style="max-width: 100%; height: auto;" />
-          <!-- Stable continuous flight at 1 m/s -->
+        <div class="sample-item" style="display: flex; flex-direction: column; align-items: center;">
+        <img src="static/images/collision_free_4x1_3.gif" alt="Learning from model weights" class="blend-img-background center-image"
+          style="max-width: 100%; height: auto;" />
           <div class="has-text-centered" style="margin-top: 6px">Fault in No.3 of 4×1 Assembly</div>
         </div>
 
-        <div class="sample-item">
+        <div class="sample-item" style="display: flex; flex-direction: column; align-items: center;">
         <img src="static/images/collision_free_4x1_4.gif" alt="Learning from model weights" class="blend-img-background center-image"
           style="max-width: 100%; height: auto;" />
-        <!-- Stable continuous flight at 1 m/s -->
         <div class="has-text-centered" style="margin-top: 6px">Fault in No.4 of 4×1 Assembly</div>
         </div>
 
-        <div class="sample-item">
+        <div class="sample-item" style="display: flex; flex-direction: column; align-items: center;">
         <img src="static/images/collision_free_3x2_2.gif" alt="Learning from model weights" class="blend-img-background center-image"
           style="max-width: 100%; height: auto;" />
-        <!-- Stable continuous flight at 1 m/s -->
         <div class="has-text-centered" style="margin-top: 6px">Fault in No.2 of 3×2 Assembly</div>
         </div>
 
@@ -405,7 +410,7 @@
           </video>
           <!-- Stable continuous flight at 1 m/s -->
           <div class="has-text-centered" style="margin-top: 6px">MARS accurately follows the collision-free
-            trajectories from our previous work [4]</div>
+            trajectories</div>
         </div>
       </div>
     </div>    
