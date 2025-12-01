@@ -233,76 +233,44 @@ Reinforcement Learning</h1>
                 Zichen Yan,
               </span>
               <span class="author-block">
-                <a href="https://ruihuangnus.github.io/" target="_blank">Rui Huang</a>,
+                Rui Huang,
               </span>
               <span class="author-block">
-                Siyu Tang,
+                Lei He,
               </span>
               <span class="author-block">
-                Jialin Zhang,
+                Shao Guo,
               </span>
               <span class="author-block">
-                Zhenyu Zhang,
-              </span>
-              <span class="author-block">
-                <a href="https://sites.google.com/view/lzhao" target="_blank">Lin Zhao</a><sup>†</sup>
+                Lin Zhao
               </span>
             </div>
 
-
-
-            <!-- <div class="is-size-5 publication-authors">
-                    <span class="author-block">Institution Name<br>Conferance name and year</span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div> -->
             <div class="is-size-5 publication-authors">
               <span class="author-block">National University of Singapore</span>
-              <!-- <span class="eql-cntrb"><small><br><sup>†</sup>Indicates Corresponding Author</small></span> -->
             </div>
 
             <div class="column has-text-centered">
               <div class="publication-links">
                 <!-- Arxiv PDF link -->
                 <span class="link-block">
-                  <a href="static/pdfs/MARS_IROS_Workshop.pdf" target="_blank"
+                  <a href="https://arxiv.org/abs/2508.12394" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
-                    <span>Workshop paper</span>
+                    <span>Arxiv</span>
                   </a>
                 </span>
 
-                <!-- Supplementary PDF link -->
-                <!-- <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Full paper</span>
-                    </a>
-                  </span> -->
-
                 <!-- Github link -->
                 <span class="link-block">
-                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                  <a href="https://github.com/Zichen-Yan/SIGN" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code - Coming soon</span>
-                  </a>
-                </span>
-
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                    </span>
-                    <span>Full paper - Coming soon (arXiv)</span>
+                    <span>Code</span>
                   </a>
                 </span>
               </div>
@@ -312,37 +280,18 @@ Reinforcement Learning</h1>
       </div>
   </section>
 
-
-  <!-- Teaser video-->
-  <!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
-  </div>
-</section> -->
   <!-- Fig1 -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <p>
-          <img src="static/images/Fig1.png" alt="Learning from model weights" class="blend-img-background center-image"
+          <img src="static/images/title.png" alt="None" class="blend-img-background center-image"
             style="max-width: 100%; height: auto;" />
         </p>
         <br>
         <p>
-          Illustration of the proposed MARS-Dragonfly strategy.
-          (a) Dragonfly-inspired MARS design.
-          (b) Equivalent model mapping control from the virtual quadrotor to MARS.
-          (c) Novel transportation modes enabled by MARS.
-          (d) Versatile trajectory planning and tracking, enabling MARS to operate like a quadrotor and eliminating the
-          need for customized algorithms.
+          SIGN enables end-to-end ImageNav for autonomous drones via visual reinforcement learning with effective sim-to-real transfer. 
+          Guided by the collision predictor, an action correction mechanism is incorporated to ensure obstacle-avoiding navigation in indoor environments.
         </p>
       </div>
     </div>
@@ -357,19 +306,7 @@ Reinforcement Learning</h1>
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Modular Aerial Robot Systems (MARS), composed of multiple self-reconfigurable drone units,
-              offer high adaptability to diverse mission scenarios and fault conditions. Existing docking mechanism
-              designs for MARS are prone to significant oscillations during docking and separation. Moreover, their
-              control systems are conservative and sensitive to disturbances, which only allow quasi-static hovering
-              flight and waypoint-based flight. To address these disadvantages, we first develop a highly integrated
-              mechanical system that significantly simplifies passive docking, detection-free passive locking, and
-              active separation by using a single servo motor. Our experimental results demonstrate substantial
-              improvements in smooth and stable docking and separation performance. To fully unleash the redundant
-              control actuation of MARS, we further propose an equivalent modeling framework that abstracts arbitrary
-              MARS configurations into a unified virtual quadrotor representation. Building on this abstraction, we
-              design and implement a model predictive control algorithm for MARS of arbitrary configurations. Moreover,
-              we develop efficient algorithms to map the virtual thrust and torque control commands to those of
-              individual units.
+              Image-goal navigation (ImageNav) tasks a robot with autonomously exploring an unknown environment and reaching a location that visually matches a given target image. While prior works primarily study ImageNav for ground robots, enabling this capability for autonomous drones is substantially more challenging due to their need for high-frequency feedback control and global localization for stable flight. In this paper, we propose a novel sim-to-real framework that leverages reinforcement learning (RL) to achieve ImageNav for drones. To enhance visual representation ability, our approach trains the vision backbone with auxiliary tasks, including image perturbations and future transition prediction, which results in more effective policy training. The proposed algorithm enables end-to-end ImageNav with direct velocity control, eliminating the need for external localization. Furthermore, we integrate a depth-based safety module for real-time obstacle avoidance, allowing the drone to safely navigate in cluttered environments. Unlike most existing drone navigation methods that focus solely on reference tracking or obstacle avoidance, our framework supports comprehensive navigation behaviors, including autonomous exploration, obstacle avoidance, and image-goal seeking, without requiring explicit global mapping.
             </p>
           </div>
         </div>
@@ -383,187 +320,61 @@ Reinforcement Learning</h1>
     <div class="hero-body">
       <div class="container">
 
-        <h2 class="title is-3">Simulation in gazebo</h2>
+        <h2 class="title is-3">Simulation in Habitat</h2>
         <!-- 111docking -->
         <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Trajectory Tracking</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
+          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">In-domain Evaluation: Gibson Benchmark</h2>
+          <div class="grid-samples" style="display: flex; justify-content: center;">
             <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/2x1.mp4" type="video/mp4">
+              <video autoplay muted loop controls style="width: 600px; height: auto;">
+                <source src="static/videos/RAL_sim_Gibson_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) 2 x 1 
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/1x1x2.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) 1 x 1 x 2
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/trans_2L.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) L-shaped transportation with 2 units
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/3x1.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (d) 3 x 1
-              </div>
-            </div>
-
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/trans_2x1.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (e) 2 x 1 transportation
-              </div>
-            </div>
-
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/simulation/3L.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (f) L-shape
-              </div>
             </div>
           </div>
         </div>
 
         <div class="task-section" style="margin-bottom: 36px;">
-          
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Agile flight</h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
+          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Cross-domain Evaluation: HM3D Benchmark</h2>
+          <div class="grid-samples" style="display: flex; justify-content: center;">
             <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/agile_45.mp4" type="video/mp4">
+              <video autoplay muted loop controls style="width: 600px; height: auto;">
+                <source src="static/videos/RAL_sim_HM3D_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Pitch: 45 deg
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/agile_75.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Pitch: 60 deg
-              </div>
-            </div>
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/simulation/45_agile_roll.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Roll: 45 deg
-              </div>
             </div>
           </div>
         </div>
 
-        <h2 class="title is-3">Docking Mechanism Experiments</h2>
-        <!-- 111docking -->
         <div class="task-section" style="margin-bottom: 36px;">
-
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;"> </h2>
-
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- video 1 + text -->
+          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Cross-domain Evaluation: MP3D Benchmark</h2>
+          <div class="grid-samples" style="display: flex; justify-content: center;">
             <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/passive_locking.mp4" type="video/mp4">
+              <video autoplay muted loop controls style="width: 600px; height: auto;">
+                <source src="static/videos/RAL_sim_MP3D_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Passive detection-free locking
-              </div>
-            </div>
-
-            <!-- video 2 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/activate_separation.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Active repulsion-based separation
-              </div>
-            </div>
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls>
-                <source src="static/videos/locking_strength.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Pendulum test evaluates docked connection strength
-              </div>
             </div>
           </div>
         </div>
-        <!-- ok -->
 
         <!-- Main point hardware -->
         <h2 class="title is-3">Real-world Experiments</h2>
         <!-- docking -->
         <div class="task-section" style="margin-bottom: 36px;">
 
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Mid-air docking</h2>
+          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Motion Capture Room</h2>
 
-          <div class="grid-samples" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);display: flex; justify-content: center;">
             <!-- video 1 + text -->
             <div class="sample-item">
               <video autoplay muted loop controls>
-                <source src="static/videos/docking_com_ours.mp4" type="video/mp4">
+                <source src="static/videos/RAL_demo1_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (a) Smooth docking with
-                minimal disturbance (Ours)
-              </div>
             </div>
 
             <!-- video 2 + text -->
             <div class="sample-item">
               <video autoplay muted loop controls>
-                <source src="static/videos/docking_comparison.mp4" type="video/mp4">
+                <source src="static/videos/RAL_demo4_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (b) Large post-docking
-                position oscillation [1]
-              </div>
-            </div>
-
-            <!-- video 3 + text -->
-            <div class="sample-item">
-              <video autoplay muted loop controls style="width: 100%;">
-                <source src="static/videos/docking_comparison2.mp4" type="video/mp4">
-              </video>
-              <div class="has-text-centered" style="margin-top: 6px">
-                (c) Large post-docking
-                position oscillation [2]
-              </div>
             </div>
           </div>
         </div>
@@ -571,26 +382,21 @@ Reinforcement Learning</h1>
         <!--separate-->
         <div class="task-section" style="margin-bottom: 36px;">
 
-          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Active
-            repulsion-based separation</h2>
+          <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Office1</h2>
 
           <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
             <!-- video 1 + text -->
             <div class="sample-item">
               <video autoplay muted loop controls>
-                <source src="static/videos/separation_com_ours.mp4" type="video/mp4">
+                <source src="static/videos/RAL_demo3_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">(a) Minimizing attitude change
-                and enhancing safety and robustness (Ours)</div>
             </div>
 
             <!-- video 2 + text -->
             <div class="sample-item">
               <video autoplay muted loop controls>
-                <source src="static/videos/separation_comparison.mp4" type="video/mp4">
+                <source src="static/videos/RAL_demo5_fix.mp4" type="video/mp4">
               </video>
-              <div class="has-text-centered" style="margin-top: 6px">(b) Significant attitude and
-                position oscillations during separation [3]</div>
             </div>
           </div>
         </div>
@@ -600,155 +406,20 @@ Reinforcement Learning</h1>
       <!-- Video-to-Audio Generation -->
       <div class="task-section" style="margin-bottom: 36px;">
 
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Trajectory tracking</h2>
+        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Office2</h2>
 
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="grid-samples" style="display: flex; justify-content: center;">
           <!-- video 1 + text -->
           <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/circular_trajectory.mp4" type="video/mp4">
+            <video autoplay muted loop controls style="width: 700px; height: auto;">
+              <source src="static/videos/RAL_demo2_fix.mp4" type="video/mp4">
             </video>
-            <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px">Circular trajectory: stable continuous flight at 1 m/s</div>
-          </div>
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_trajectory.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">Agile trajectory: robust performance under agile, high-speed
-              flight</div>
           </div>
         </div>
       </div>
     </div>
     <!-- ok -->
-    <!-- Video-to-Audio Generation -->
-    <div class="task-section" style="margin-bottom: 36px;">
 
-      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Collision-free
-        trajectory tracking</h2>
-
-      <div class="grid-samples" style="grid-template-columns: repeat(1, 1fr);">
-        <!-- video 1 + text -->
-        <div class="sample-item">
-          <video autoplay muted loop controls>
-            <source src="static/videos/collision_free.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px">MARS accurately follows the collision-free
-            trajectories from our previous work [4]</div>
-        </div>
-      </div>
-    </div>
-    <!-- ok -->
-
-     <div class="task-section" style="margin-bottom: 36px;">
-
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Agile trajectory tracking</h2>
-
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-          <!-- video 1 + text -->
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_20deg.mp4" type="video/mp4">
-            </video>
-            <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px">(a) Pitch: 20 deg</div>
-          </div>
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_30deg.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">(b) Pitch: 30 deg</div>
-          </div>
-
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_40deg.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">(c) Pitch: 40 deg</div>
-          </div>
-
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/agile_20deg_roll.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px">(d) Roll: 20 deg</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="task-section" style="margin-bottom: 36px;">
-
-        <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Object transportation</h2>
-
-        <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-          <!-- video 1 + text -->
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">circular_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/trans.mp4" type="video/mp4">
-            </video>
-            <!-- Stable continuous flight at 1 m/s -->
-            <div class="has-text-centered" style="margin-top: 6px"> (a) Cooperative transportation with a 40 cm basket </div>
-          </div>
-          <div class="sample-item">
-            <!-- Stable continuous flight at 1 m/s -->
-            <!-- <div class="has-text-centered" style="margin-top: 6px">agile_trajectory</div> -->
-            <video autoplay muted loop controls>
-              <source src="static/videos/trans_ball.mp4" type="video/mp4">
-            </video>
-            <!-- Robust performance under agile, high-speed flight -->
-            <div class="has-text-centered" style="margin-top: 6px"> (b) Transportation with a sloshing load (basketball) </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Video-to-Audio Generation -->
-    <div class="task-section" style="margin-bottom: 36px;">
-
-      <h2 class="title is-4 has-text-centered" style="margin-bottom: 18px;">Full docking–separation process</h2>
-
-      <div class="grid-samples" style="grid-template-columns: repeat(2, 1fr);">
-        <!-- video 1 + text -->
-        <div class="sample-item">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/docking.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px"> (a) Docking </div>
-        </div>
-        <!-- video 2 + text -->
-        <div class="sample-item">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/Separation.mp4" type="video/mp4">
-          </video>
-          <!-- Stable continuous flight at 1 m/s -->
-          <div class="has-text-centered" style="margin-top: 6px"> (b) Separation </div>
-        </div>
-      </div>
-    </div>
   </section>
   <!-- End video carousel -->
 
@@ -761,25 +432,8 @@ Reinforcement Learning</h1>
       </div>
     </div>
 
-
-
-    <!-- Paper poster -->
-    <section class="hero is-small is-light">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title">Poster</h2>
-
-          <iframe src="static/pdfs/Poster_MARS2_compressed.pdf" width="100%" height="550">
-          </iframe>
-
-        </div>
-      </div>
-    </section>
-    <!--End paper poster -->
-
-
-    <!--BibTex citation -->
-    <section class="section" id="BibTeX">
+    <!-- BibTex citation -->
+    <!-- <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
         <p>
@@ -810,7 +464,7 @@ Reinforcement Learning</h1>
         <br>
         [2] Rui Huang, Zhenyu Zhang, Siyu Tang, Zhiqian Cai, and Lin Zhao. "MARS-FTCP: Robust Fault-Tolerant Control and Agile Trajectory Planning for <strong>Modular Aerial Robot Systems</strong>." In 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). <a href="https://arxiv.org/pdf/2503.09351" target="_blank">arXiv preprint</a>
       </div>
-    </section>
+    </section> -->
     <!--End BibTex citation -->
 
 
