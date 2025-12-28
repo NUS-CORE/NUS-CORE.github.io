@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+date: 2025-07 07:59:00-0400
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+Our paper titled "Incremental Policy Iteration for Unknown Nonlinear Systems with Stability and Performance Guarantees" has been accepted by IEEE CDC 2025. Congrats to Qingkai and Fenglan! :sparkles: :smile:
