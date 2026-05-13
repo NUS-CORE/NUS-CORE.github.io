@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control">
-  <meta property="og:title" content="Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control"/>
-  <meta property="og:description" content="Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control"/>
+  <meta name="description" content="Safe Multi-Agent Navigation via Constrained HJB-Informed Learning">
+  <meta property="og:title" content="Safe Multi-Agent Navigation via Constrained HJB-Informed Learning"/>
+  <meta property="og:description" content="Safe Multi-Agent Navigation via Constrained HJB-Informed Learning"/>
   <meta property="og:url" content="URL OF THE WEBSITE"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <!-- <meta property="og:image" content="static/image/banner_image_square.png" />
@@ -14,8 +14,8 @@
   <meta property="og:image:height" content="600"/> -->
 
 
-  <meta name="twitter:title" content="Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control">
-  <meta name="twitter:description" content="Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control">
+  <meta name="twitter:title" content="Safe Multi-Agent Navigation via Constrained HJB-Informed Learning">
+  <meta name="twitter:description" content="Safe Multi-Agent Navigation via Constrained HJB-Informed Learning">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <!-- <meta name="twitter:image" content="static/images/banner_image_square.png">
   <meta name="twitter:card" content="summary_large_image"> -->
@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control</title>
+  <title>Safe Multi-Agent Navigation via Constrained HJB-Informed Learning</title>
   <link rel="icon" type="image/x-icon" href="static/images/CI_LOGO.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -44,6 +44,30 @@
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  .video-crop {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  .video-crop video {
+    width: 125% !important;
+    height: 125% !important;
+    max-width: none !important;
+    object-fit: cover;
+    transform: translate(-10%, -10%);
+    display: block;
+  }
+  .video-crop-less-right video {
+    width: 112% !important;
+    height: 112% !important;
+    max-width: none !important;
+    object-fit: cover;
+    transform: translate(-4%, -6%) !important;
+    display: block;
+  }
+</style>
 </head>
 <body>
 
@@ -53,48 +77,48 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Learning Distributed Safe Multi-Agent Navigation via Infinite-Horizon Optimal Graph Control</h1>
+            <h1 class="title is-1 publication-title">Safe Multi-Agent Navigation via <br> Constrained HJB-Informed Learning</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="" target="_blank">Fenglan Wang</a>,</span>
+                <a href="https://scholar.google.com/citations?user=wo6W6DUAAAAJ&hl=en&oi=sra" target="_blank">Fenglan Wang</a>,</span>
                 <span class="author-block">
-                  <a href="" target="_blank">Xinguo Shu</a>,</span>
+                  <a href="https://scholar.google.com/citations?user=B35tin4AAAAJ&hl=en&oi=sra" target="_blank">Xinguo Shu</a>,</span>
                   <span class="author-block">
-                    <a href="" target="_blank">Lei He</a>,</span>
+                    <a href="https://scholar.google.com/citations?user=QGwYalkAAAAJ&hl=en&oi=sra" target="_blank">Lei He</a>,</span>
                     <span class="author-block">
-                      <a href="" target="_blank">Lin Zhao</a><sup>*</sup>
+                      <a href="https://scholar.google.com/citations?user=091lFhYAAAAJ&hl=en&oi=sra" target="_blank">Lin Zhao</a><sup>*</sup>
                   </span>
                   </div>
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block">National University of Singapore<br>Department of Electrical and Computer Engineering</span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Corresponding Author</small></span>
+                    <span class="author-block">National University of Singapore, Department of Electrical and Computer Engineering</span>
+                    <span class="eql-cntrb"><br>CORE Lab</span>
                   </div>
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
                       <!-- Arxiv PDF link -->
-                      <!-- <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2506.22117.pdf" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
                         </span>
-                        <span>Paper</span>
+                        <span>arXiv</span>
                       </a>
-                    </span> -->
+                    </span> 
 
                       <!-- Github link -->
-                      <!-- <span class="link-block">
-                        <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                      <span class="link-block">
+                        <a href="https://github.com/hublan24/HJB-GNN" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fab fa-github"></i>
                         </span>
                         <span>Code</span>
                       </a>
-                    </span> -->
+                    </span> 
                 </div>
           </div>
         </div>
@@ -115,16 +139,17 @@
 <!-- End teaser video -->
 
 <!-- Paper abstract -->
-<section class="section hero is-light">
+<section class="section" style="padding-top: 0.5rem;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Distributed multi-agent navigation faces inherent challenges due to the competing requirements of maintaining safety and achieving goal-directed behavior, particularly for agents with limited sensing range operating in unknown environments with dense obstacles. Existing approaches typically project predefined goal-reaching controllers onto control barrier function (CBF) constraints, often resulting in conservative and suboptimal trade-offs between safety and goal-reaching performance. 
-            We propose an infinite-horizon CBF-constrained optimal graph control formulation for distributed safe multi-agent navigation. By deriving the analytical solution structure, we develop a novel Hamilton-Jacobi-Bellman (HJB)-based learning framework to approximate the solution. In particular, our algorithm jointly learns a CBF and a distributed control policy, both parameterized by graph neural networks (GNNs), along with a value function that robustly guides agents toward their goals. Moreover, we introduce a state-dependent parameterization of Lagrange multipliers, enabling dynamic trade-offs between safety and performance. Unlike traditional short-horizon, quadratic programming-based CBF methods, our approach leverages long-horizon optimization to proactively avoid deadlocks and navigate complex environments more effectively.
-            Extensive simulation results demonstrate substantial improvements in safety and task success rates across various agent dynamics, with strong scalability and generalization to large-scale teams in previously unseen environments. Real-world experiments using Crazyflie drone swarms on challenging antipodal position-swapping tasks further validate the practicality, generalizability, and robustness of the proposed HJB-GNN learning framework. 
+            Multi-agent navigation in unknown and cluttered environments has broad applications, yet remains fundamentally challenging. In particular, dense agent-agent and agent-obstacle reactive interactions can exacerbate the inherent competition between collision-avoidance constraints and goal-reaching objectives. Most existing approaches mitigate this by applying per-step safety filtering on top of a predefined goal-reaching controller or by designing heuristic loss functions that penalizes safety constraints violation gradient.
+            While effective in sparse environments, these methods still suffer from overly-conservative behaviors when interactions become dense.
+            To overcome these limitations, we propose HJB-GNN, a Hamilton-Jacobi-Bellman (HJB)-based learning framework that jointly learns a graph neural network (GNN)-parameterized control barrier function for explicit safety enforcement, a distributed GNN-based navigation policy, and a value function that induces goal-reaching behavior. By exploiting the analytical solution of the constrained HJB equation, the proposed method derives graph-dependent Lagrange multipliers that adaptively balance collision-avoidance and goal-reaching across diverse multi-agent navigation scenarios.
+            Moreover, HJB-GNN supports centralized training with distributed deployment. Extensive simulations and real-world experiments with Crazyflie drone swarms demonstrate its superior safety and goal-reaching performance, as well as strong scalability and generalizability to large-scale teams operating in previously unseen, dense environments.
           </p>
         </div>
       </div>
@@ -135,22 +160,21 @@
 
 
 <!-- main -->
-<section class="section">
+<section class="section" style="padding-top: 0.5rem;">
   <div class="container is-max-desktop">
     
     <!-- Main point hardware -->
     <div class="column">
-      <h2 class="title is-3">Hardware Experiments</h2>
-
+      <!-- <h2 class="title is-3">Hardware Experiments</h2> -->
       <div class="column">
         <div class="columns is-centered">
-          <img src="static/images/fig8.png" class="center-image" style="max-width: 100%;" alt="fig 5">
+          <img src="static/images/fig8.png" class="center-image" style="max-width: 115%;" alt="fig 5">
         </div>
       </div>
       <h3 style="margin-top: 20px">
-        Fig. 8. Hardware experiment setup for antipodal position-swapping task: (a) 8 Crazyflie drones without obstacle; (b) 2 Crazyflie drones with a long static obstacle; (c) 8 Crazyflie drones with large non-convex static obstacles; (d) 8 Crazyflie drones with both a static obstacle and a large dynamic obstacle mounted on a randomly moving car.
+        Fig. 1 & 7. Hardware experiment setup for antipodal position-swapping task: (a) 8 Crazyflie drones without obstacle; (b) 2 Crazyflie drones with a long static obstacle; (c) 8 Crazyflie drones with large non-convex static obstacles; (d) 8 Crazyflie drones with both a static obstacle and a large dynamic obstacle mounted on a randomly moving car.
       </h3>
-      <br><br><br><br>
+      <br><br><br>
 
       <div class="container">
 
@@ -230,26 +254,7 @@
       </div>
 
 
-      <br><br><br><br>
-      <div class="column">
-        <div class="columns is-centered">
-          <img src="static/images/fig10.png" class="center-image" style="max-width: 60%;" alt="fig 5">
-        </div>
-      </div>
-      <h3 style="margin-top: 20px">
-        Fig. 10. Hardware experiment results: Minimum distances between each agent and other agents or obstacles over time for four sets of experiments under \(r=0.05{\rm m}\), corresponding to scenarios (a)-(d) in Fig. 8, respectively.
-      </h3>
-      <br><br><br><br>
-      <div class="column">
-        <div class="columns is-centered">
-          <img src="static/images/fig11.png" class="center-image" style="max-width: 60%;" alt="fig 5">
-        </div>
-      </div>
-      <h3 style="margin-top: 20px">
-        Fig. 11. Simulation trajectories of all Crazyflie drones correspond to four sets of experiments in Fig. 8. The upper gray rectangle in (d) indicates the initial position of dynamic obstacle in (d) of Fig. 8.
-      </h3>
-      <br><br><br><br>
-      
+      <br><br>
       <!-- <div class="content">
         <div class="content has-text-justified">
           <div class="columns is-centered">
@@ -292,133 +297,193 @@
     </div>
     <!-- End Main point hardware -->
     
-    <!-- Main point simulaiton -->
+    <!-- Main point simulation -->
     <div class="column">
-      <h2 class="title is-3">Numerical Simulations</h2>
+      <h2 class="title is-3">Simulations</h2>
+
       <div class="content">
         <div class="content has-text-justified">
-          <b style="font-size: 20px;">
-            2D environment
-          </b>
+
+          <div style="margin-top: 0.75rem; margin-bottom: 2rem;">
+            <b style="font-size: 20px;">
+              HJB-GNN controller in 2D environment trained with 8 agents and tested with 128/512/1024 agents
+            </b>
+          </div>
           <div class="columns is-centered">
-            <!-- <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+            <!--
+            <div class="column has-text-centered">
+              <video width="100%" autoplay muted loop>
                 <source src="static/videos/vs_a64o0area4.mp4" type="video/mp4">
               </video>
               <p class="has-text-weight-semibold">agents=64 obstacles=0</p>
-            </div> -->
-            <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
-                <source src="static/videos/vs_a128o0area4.5.mp4" type="video/mp4">
-              </video>
-              <p class="has-text-weight-semibold">agents=128, obstacles=0</p>
             </div>
+            -->
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
+                  <source src="static/videos/vs_a128o0area4.5.mp4" type="video/mp4">
+                </video>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=128, obstacles=0</p> -->
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/vs_a512o0area10.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=512, obstacles=0</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=512, obstacles=0</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/vs_a1024o0area16.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=1024, obstacles=0</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=1024, obstacles=0</p> -->
             </div>
           </div>
+              <div style="margin-top: 1.5rem; margin-bottom: 2rem;">
+            <b style="font-size: 20px;">
+              HJB-GNN controller in 2D environment tested with 16/32/32 agents and 16/16/32 obstacles
+            </b>
+              </div>
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+                <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/di_a16o16area4.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=16, obstacles=16</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=16, obstacles=16</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/di_a32o16area5.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=32, obstacles=16</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=32, obstacles=16</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/di_a32o32area5.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=32, obstacles=32</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=32, obstacles=32</p> -->
             </div>
           </div>
-          <b style="font-size: 20px;"> 
-            3D environment
-          </b>
+
+          <!-- <b style="font-size: 20px;">3D environment</b> -->
+          <div style="margin-top: 1.5rem; margin-bottom: 2rem;">
+            <b style="font-size: 20px;">
+              HJB-GNN controller in 3D environment trained with 8 agents and tested with 64/128/512 agents
+            </b>
+          </div>
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/cf_a64o0area4.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=64, obstacles=0</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=64, obstacles=0</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/cf_a128o0area4.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=128, obstacles=0</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=128, obstacles=0</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/cf_a512o0area4.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=512, obstacles=0</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=512, obstacles=0</p> -->
             </div>
+          </div>
+          <div style="margin-top: 1.5rem; margin-bottom: 2rem;">
+            <b style="font-size: 20px;">
+              HJB-GNN controller in 3D environment tested with 32/64/128 agents and 16/32/64 obstacles
+            </b>
           </div>
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/cf_a32o16area4.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=32, obstacles=16</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=32, obstacles=16</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/cf_a64o32area4.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=64, obstacles=32</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=64, obstacles=32</p> -->
             </div>
+
             <div class="column has-text-centered">
-              <video width="100%" autoplay="" muted="" loop="">
+              <div class="video-crop">
+                <video autoplay muted loop playsinline>
                 <source src="static/videos/cf_a128o64area8.mp4" type="video/mp4">
               </video>
-              <p class="has-text-weight-semibold">agents=128, obstacles=64</p>
+              </div>
+              <!-- <p class="has-text-weight-semibold">agents=128, obstacles=64</p> -->
             </div>
           </div>
+
         </div>
       </div>
     </div>
-    <!--/End Main point simulaiton -->
+    <!-- End Main point simulation -->
 
-    <h2 class="title is-3" style="margin-top: 20px; margin-bottom: 20px">All Figures in the Paper</h2>
-    <h2 style="font-size: 20px; margin-top: 20px; margin-bottom: 20px; font-weight: bold">Simulations for the HJB-GNN Learning Approach</h2>
+    <br><br><br>
+    <!-- <h2 class="title is-3" style="margin-top: 20px; margin-bottom: 20px">All Figures in the Paper</h2> -->
+    <h2 style="font-size: 20px; margin-top: 1px; margin-bottom: 15px; font-weight: bold">More simulations using HJB-GNN</h2>
  
     <!--/ Main point lagrange -->     
     <div class="column">
+        <div class="columns is-centered" style="gap: 1.0rem;">
+          <div class="video-crop" style="width: 50%; aspect-ratio: 4 / 3;">
+            <video autoplay muted loop playsinline>
+              <source src="static/videos/video2.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="video-crop video-crop-less-right" style="width: 55%; aspect-ratio: 4 / 3;">
+            <video autoplay muted loop playsinline>
+              <source src="static/videos/video2_cbf2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
       <div class="columns is-centered">
-        <video width="40%" autoplay="" muted="" loop="">
-          <source src="static/videos/video2.mp4" type="video/mp4">
-        </video>
-        <video width="45%" autoplay="" muted="" loop="">
-          <source src="static/videos/video2_cbf2.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="columns is-centered">
-        <img src="static/images/fig2.png" class="center-image" style="max-width: 80%;" alt="fig 2 plot">
+        <img src="static/images/fig2.png" class="center-image" style="max-width: 100%;" alt="fig 2 plot">
       </div>
     </div>
     <h3 style="margin-top: 20px">
-      Fig. 2. Illustration of our HJB-GNN approach on the unmanned surface vessel under 4 agents and 4 static obstacles case in a \(2\,\mathrm{m} \times 1.5\,\mathrm{m}\) region: 
-      (a) four agents (numbered circles indicating their initial positions) reach their respective goals (squares with the same color as agents) while avoiding collisions with other agents and static obstacles (gray rectangles),  
-      (b) graph CBF contour of agent 2 at \(t=0.6{\rm s}\),  
-      (c) approximated Lagrange multipliers \(\hat{\lambda}_i,\ i=1,2,3,4\) of four agents, and  
-      (d) learned distributed controller \(\pi_{\varphi}(\eta_2)=[\pi_{\varphi 1}(\eta_2),\pi_{\varphi 2}(\eta_2),\pi_{\varphi 3}(\eta_2)]^T\) of agent 2.
+      Fig. 2. Adaptive trade-off between safety and goal-reaching performance for unmanned surface vessel model of [17] in cluttered, dense environment with \(2\mathrm{m} \times 1.5\mathrm{m}\). 
+      (a) Four agents safely navigate to their respective goals. Numbered circles denote initial positions of agents, squares with the same color as agents are their goals, and gray rectangles are static obstacles. 
+      (b) Learned graph CBF contour of agent 2 at \(t=0.6{\rm s}\), where the zero-level set of learned CBF identifies the safety boundaries. 
+      (c) Approximated Lagrange multipliers \(\hat{\lambda}_i, i=1,2,3,4\). 
+      (d) Learned distributed controller of agent 2. Detailed simulation setup is illustrated in Appendix
     </h3>
-    <br><br><br><br>
+    <br><br>
     <!--/End Main point lagrange -->
 
     <!--/ Main point fig 3 -->
@@ -428,28 +493,27 @@
       </div>
     </div>
     <h3 style="margin-top: 20px">
-      Fig. 3. Safe-reaching rates ((a), (c), (e)) and safety rates ((b), (d), (f)) for 2D unmanned surface vessel under fixed area width. (a)-(b): no obstacle with increasing numbers of agents, (c)-(d): 256 agents with increasing numbers of obstacles, and (e)-(f): 1024 agents with increasing numbers of obstacles. 
+      Fig. 8. Safe-reaching rates ((a), (c), (e)) and safety rates ((b), (d), (f)) for 2D unmanned surface vessel under fixed area width. (a)-(b): no obstacle with increasing numbers of agents, (c)-(d): 256 agents with increasing numbers of obstacles, and (e)-(f): 1024 agents with increasing numbers of obstacles. 
     </h3>
-    <br><br><br><br>
+    <br><br>
     <!--/End Main point fig 3 -->
 
-    <h2 style="font-size: 20px; margin-top: 20px; margin-bottom: 20px; font-weight: bold">Comparative Simulations</h2>
-      <!--/ Main point single comparison -->
-      <div class="column">
-      <div class="columns is-centered">
-        <video width="40%" autoplay="" muted="" loop="">
-          <source src="static/videos/video6_ori.mp4" type="video/mp4">
-        </video>
-        <video width="40%" autoplay="" muted="" loop="">
-          <source src="static/videos/video6_our.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="columns is-centered">
-        <img src="static/images/fig6.png" class="center-image" style="max-width: 80%;" alt="fog 6 plot">
-      </div>
-    </div>
+    <h2 style="font-size: 20px; margin-top: 1px; margin-bottom: 5px; font-weight: bold">Comparative simulations between HJB-GNN and QP-GCBF+</h2>
+    <!--/ Main point single comparison -->
+        <div class="columns is-centered" style="margin-bottom: 0;">
+          <video width="55%" autoplay muted loop playsinline style="display: block;">
+            <source src="static/videos/video6_ori.mp4" type="video/mp4">
+          </video>
+          <video width="55%" autoplay muted loop playsinline style="display: block;">
+            <source src="static/videos/video6_our.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-centered" style="margin-top: -5rem;">
+          <img src="static/images/fig6.png" class="center-image" style="max-width: 110%; display: block;" alt="fig 6 plot">
+        </div>
     <h3 style="margin-top: 20px">
-      Fig. 1. Comparison between QP-GCBF+ of [32] in (a) and our HJB-GNN in (b). An agent (a gradient-colored circle) aims to reach the goal (blue square) while avoiding static obstacles (gray rectangles) within a \(4{\rm m}\times4{\rm m}\) region. The black arrow indicates the velocity direction of agent. The QP-GCBF+ has deadlock near obstacles, and our HJB-GNN approach achieves goal-reaching without collision. 
+      Fig. 3. Comparison between QP-GCBF+ of [35] in (a) and our HJB-GNN in (b). An agent (a gradient-colored circle) aims to reach the goal (blue square) while avoiding static obstacles (gray rectangles) within a \(4{\rm m}\times4{\rm m}\) region. Black arrow indicates the velocity direction of agent. The QP-GCBF+ has deadlock near obstacles, and the HJB-GNN achieves goal-reaching without collision.
     </h3>
     <br>
     <!--/End Main point single comparison -->
@@ -483,42 +547,52 @@
       </div>
     </div>
     <h3 style="margin-top: 20px">
-      Fig. 4. Comparisons between the QP-GCBF+ method ((a), (c), and (e)) in [32] and our HJB-GNN approach ((b), (d), and (f)) under three cases with four agents (circles indicating their initial positions) and four static obstacles (gray rectangles) in a \(2{\rm m}\times2{\rm m}\) region. Agent 1 in (a) and agent 2 in (c) experience deadlock, and agent 3 in (e) collides with an obstacle. All agents safely reach their respective goals (squares with the same colors as agents) in (b), (d), and (f). 
+      Fig. 4. Comparisons between the QP-GCBF+ method ((a), (c), and (e)) in [35] and our HJB-GNN approach ((b), (d), and (f)) under three cases with four agents (circles indicating their initial positions) and four static obstacles (gray rectangles) in a \(2{\rm m}\times2{\rm m}\) region. Agent 1 in (a) and agent 2 in (c) experience deadlock, and agent 3 in (e) collides with an obstacle. All agents safely reach their respective goals (squares with the same colors as agents) in (b), (d), and (f).
     </h3>
-    <br><br><br><br>
+    <br><br>
     <!--/End Main double integrator comparison-->
 
 
 
-    <!--/ Main point fig 345 -->
-    <div class="column">
-      <div class="columns is-centered">
-        <img src="static/images/fig3.png" class="center-image" style="max-width: 60%;" alt="fig 3">
+   <!--/ Main point fig 345 -->
+
+      <div class="column">
+
+        <div class="columns is-centered">
+
+          <div class="column has-text-centered">
+            <img src="static/images/fig3.png" class="center-image" style="max-width: 100%;" alt="fig 3">
+            <h3 style="margin-top: 20px; text-align: left;">
+              Fig. 9. Safe-reaching rates and safety rates for increasing numbers of agents and no obstacle under fixed area width. 
+              (a)-(b): 2D double integrator, and (c)-(d): 3D Crazyflie drone.
+            </h3>
+          </div>
+
+          <div class="column has-text-centered">
+            <img src="static/images/fig4.png" class="center-image" style="max-width: 100%;" alt="fig 4">
+            <h3 style="margin-top: 20px; text-align: left;">
+              Fig. 5. Safe-reaching rates and safety rates for increasing numbers of obstacles and 256 agents under fixed area width. 
+              (a)-(b): 2D double integrator, and (c)-(d): 3D Crazyflie drone. 
+            </h3>
+          </div>
+
+          <div class="column has-text-centered">
+            <img src="static/images/fig5.png" class="center-image" style="max-width: 100%;" alt="fig 5">
+            <h3 style="margin-top: 20px; text-align: left;">
+              Fig. 6. Safe-reaching rates and safety rates for increasing numbers of obstacles and 1024 agents under fixed area width. 
+              (a)-(b): 2D double integrator, and (c)-(d): 3D Crazyflie drone. 
+            </h3>
+          </div>
+
+        </div>
+
       </div>
-    </div>
-    <h3 style="margin-top: 20px">
-      Fig. 5. Safe-reaching rates and safety rates for increasing numbers of agents and no obstacle under fixed area width. (a)-(b): 2D double integrator, and (c)-(d): 3D Crazyflie drone. 
-    </h3>
-    <br><br><br><br>
-    <div class="column">
-      <div class="columns is-centered">
-        <img src="static/images/fig4.png" class="center-image" style="max-width: 60%;" alt="fig 4">
-      </div>
-    </div>
-    <h3 style="margin-top: 20px">
-      Fig. 6. Safe-reaching rates and safety rates for increasing numbers of obstacles and 256 agents under fixed area width. (a)-(b): 2D double integrator, and (c)-(d): 3D Crazyflie drone. 
-    </h3>
-    <br><br><br><br>
-    <div class="column">
-      <div class="columns is-centered">
-        <img src="static/images/fig5.png" class="center-image" style="max-width: 60%;" alt="fig 5">
-      </div>
-    </div>
-    <h3 style="margin-top: 20px">
-      Fig. 7. Safe-reaching rates and safety rates for increasing numbers of obstacles and 1024 agents under fixed area width. (a)-(b): 2D double integrator, and (c)-(d): 3D Crazyflie drone. 
-    </h3>
-    <br><br><br><br>
-    <!--/End Main point fig 345 -->
+
+      <br><br><br><br>
+
+      <!--/End Main point fig 345 -->
+
+    
 
 </div></section>
 <!--End main -->
