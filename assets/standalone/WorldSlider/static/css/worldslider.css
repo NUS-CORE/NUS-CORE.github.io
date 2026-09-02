@@ -184,7 +184,7 @@ body { color: var(--ws-ink); }
 /* Epigraph: centred, in the serif the template already loads, so it reads as a
    different voice from the body text rather than as a caption. */
 .ws-epigraph {
-  max-width: 44ch;
+  max-width: 88ch;
   margin: .5rem auto 3rem;
   text-align: center;
   color: #4a5058;
