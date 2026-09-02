@@ -137,6 +137,11 @@ body { color: var(--ws-ink); }
 .ws-lead {
   max-width: 66ch; margin: 0 auto 2rem;
   font-size: 1.06rem; line-height: 1.7; color: #3b4049;
+  /* justified to match the abstract; hyphenation keeps the word spacing even
+     rather than opening rivers down the column */
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 .ws-lead em { font-style: italic; font-weight: 600; color: var(--ws-ink); }
 
