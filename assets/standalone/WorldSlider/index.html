@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>WorldSlider: Generating Parallel Worlds of a Flight</title>
+
+  <!-- Social / search metadata -->
+  <meta name="description"
+    content="WorldSlider generates parallel worlds of a flight: visually distinct videos that share one prescribed flight trajectory." />
+  <meta name="keywords"
+    content="video generation, flight trajectory, camera control, UAV, drone, aerial video, flight, world model, diffusion distillation, FlightGrid" />
+  <meta property="og:title" content="WorldSlider: Generating Parallel Worlds of a Flight" />
+  <meta property="og:description"
+    content="Visually distinct videos that fly one prescribed flight trajectory, driven by an appearance-free control signal built from the flight's metric poses." />
+  <meta property="og:url" content="https://nus-core.github.io/assets/standalone/WorldSlider/" />
+  <meta property="og:image" content="static/images/teaser_card.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WorldSlider: Generating Parallel Worlds of a Flight" />
+  <meta name="twitter:description"
+    content="Visually distinct videos that share one prescribed flight trajectory." />
+  <meta name="twitter:image" content="static/images/teaser_card.jpg" />
+
+  <!-- TODO: drop a favicon at static/images/favicon.ico -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+
+  <link rel="stylesheet" href="static/css/bulma.min.css" />
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="static/css/index.css" />
+  <link rel="stylesheet" href="static/css/worldslider.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script src="static/js/worldslider.js"></script>
+</head>
+
+<body>
+
+  <!-- ==================================================================== -->
+  <!-- Title / authors / links                                              -->
+  <!-- ==================================================================== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              WorldSlider: Generating Parallel Worlds of a Flight
+            </h1>
+
+            <!-- AUTHORS -->
+            <!-- Anonymous variant — keep this while the paper is under double-blind review.
+                 Swap in the named block below for the camera-ready / collaborator version. -->
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Anonymous Authors</span>
+            </div>
+
+            <!--
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="#" target="_blank">First Author</a>,</span>
+              <span class="author-block"><a href="#" target="_blank">Second Author</a>,</span>
+              <span class="author-block"><a href="#" target="_blank">Corresponding Author</a><sup>&dagger;</sup></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">National University of Singapore</span>
+              <span class="eql-cntrb"><small><br /><sup>&dagger;</sup>Corresponding author</small></span>
+            </div>
+            -->
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper (PDF) -->
+                <span class="link-block">
+                  <a href="static/pdfs/worldslider.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- arXiv — TODO: fill in the id -->
+                <span class="link-block">
+                  <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code — TODO -->
+                <span class="link-block">
+                  <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Data — TODO -->
+                <span class="link-block">
+                  <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span>Data</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Teaser: the paper figure beside its moving counterpart               -->
+  <!-- ==================================================================== -->
+  <section class="hero teaser">
+    <div class="ws-wide is-xwide">
+      <div class="hero-body">
+        <p class="ws-lead">
+          Consider a flight through a polar research station. The same flight can be revisited under
+          a rose-colored sky, or transferred altogether to a tropical reservoir. The illumination,
+          geometry, and identity of the scene change, yet the flight advances, banks, and turns with
+          the same rhythm. We study the problem of generating these <em>parallel worlds of a
+          flight</em>: visually distinct videos that all fly one prescribed trajectory.
+        </p>
+
+        <div class="ws-split is-matched" style="--ws-l: 2.59287fr; --ws-r: 1fr">
+
+          <!-- left: the static teaser figure -->
+          <figure class="ws-figure">
+            <div class="ws-panel-labels is-1"><span>Synchronized timesteps</span></div>
+            <img src="static/images/teaser.png" width="2401" height="926"
+              alt="Four rows of synchronized frames from one flight: the source polar-station flight, its FlightGrid trace, the same flight under a sunset sky, and the same flight transferred to a tropical reservoir. At right, the trajectories recovered from the generated videos are aligned to the source trajectory." />
+            <figcaption class="ws-caption" style="margin-top: .75rem">
+              <strong>Rows:</strong> the source flight, its FlightGrid trace, the same flight under a
+              sunset sky, and the same flight in a tropical reservoir. Columns are synchronized
+              timesteps. At right, the trajectory recovered from each generated video, aligned to the
+              source trajectory.
+            </figcaption>
+          </figure>
+
+          <!-- right: the same idea, moving. Square, so it needs a ceiling for when
+               the row collapses to a single column. -->
+          <figure class="ws-figure is-narrow" style="--ws-max: 800px">
+            <div class="ws-panel-labels is-3">
+              <span>First frame</span><span>FlightGrid</span><span class="is-ours">Video</span>
+            </div>
+            <video id="teaser-video" data-src="static/videos/teaser.mp4"
+              poster="static/images/teaser_poster.jpg"
+              width="1920" height="1920" muted loop playsinline
+              aria-label="Three worlds along one polar flight, each shown as first frame, FlightGrid control, and video."></video>
+            <div class="ws-figbar">
+              <button type="button" class="ws-fs" data-target="#teaser-video">Fullscreen</button>
+              <span>Nine tiles in one square &mdash; open it large to read them.</span>
+            </div>
+            <figcaption class="ws-caption" style="margin-top: .75rem">
+              <strong>The same three worlds, moving.</strong> Each row shows the frozen first frame,
+              the FlightGrid it follows, and the resulting video &mdash; the source flight on top, the
+              sunset revisit and the reservoir transfer below.
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Motivation: where existing camera control breaks down                -->
+  <!-- ==================================================================== -->
+  <section class="section">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Motivation</div>
+        <h2 class="title is-3">Limitations of parameter-conditioned camera control</h2>
+      </div>
+
+      <p class="ws-lead">
+        Camera-conditioned video generation is well established, but existing methods are developed
+        and evaluated predominantly on smooth, canonical trajectories. Under the compound motion of an
+        executed flight &mdash; simultaneous translation, rotation, speed variation and altitude change
+        &mdash; control degrades substantially. Below, Wan2.1-Fun-CC and RealCam-I2V are conditioned on
+        the trajectory of the reference flight shown at left. The recovered camera motion departs from
+        the prescribed path, and appearance degrades as the model reconciles a trajectory it cannot
+        realize. We attribute this in part to the form of the conditioning signal: numeric camera
+        parameters enter the generator as an auxiliary embedding rather than in the modality through
+        which it represents scene motion. This motivates an explicitly visual control.
+      </p>
+
+      <div class="ws-grid is-2">
+          <figure class="ws-card">
+            <div class="ws-panel-labels is-3">
+              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+            </div>
+            <video data-src="static/videos/failure/apocalyptic.mp4" poster="static/images/failure/apocalyptic.jpg"
+              width="1200" height="400" muted loop playsinline
+              aria-label="Apocalyptic: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
+            <figcaption><strong>Apocalyptic.</strong> Rapid banking turn through debris.</figcaption>
+          </figure>
+          <figure class="ws-card">
+            <div class="ws-panel-labels is-3">
+              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+            </div>
+            <video data-src="static/videos/failure/ruins.mp4" poster="static/images/failure/ruins.jpg"
+              width="1200" height="400" muted loop playsinline
+              aria-label="Ruins: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
+            <figcaption><strong>Ruins.</strong> Sustained forward descent over ruined structures.</figcaption>
+          </figure>
+          <figure class="ws-card">
+            <div class="ws-panel-labels is-3">
+              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+            </div>
+            <video data-src="static/videos/failure/cyberpunkdowntown.mp4" poster="static/images/failure/cyberpunkdowntown.jpg"
+              width="1200" height="400" muted loop playsinline
+              aria-label="CyberPunk Downtown: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
+            <figcaption><strong>CyberPunk Downtown.</strong> Steep descent between towers, with large altitude change.</figcaption>
+          </figure>
+          <figure class="ws-card">
+            <div class="ws-panel-labels is-3">
+              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+            </div>
+            <video data-src="static/videos/failure/watermillday.mp4" poster="static/images/failure/watermillday.jpg"
+              width="1200" height="400" muted loop playsinline
+              aria-label="Water Mill: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
+            <figcaption><strong>Water Mill.</strong> Rapid translation over open terrain.</figcaption>
+          </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Abstract                                                             -->
+  <!-- ==================================================================== -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We study the problem of generating <em>parallel worlds of a flight</em> &mdash; visually
+              distinct videos that share the same flight trajectory &mdash; from pre-trained video
+              generative models. Controlling such generation presents an inherent trade-off: camera
+              parameters specify motion precisely but are foreign to video models, while visual
+              references are easy to condition on but reveal the original world. To bridge this gap,
+              we present <strong>WorldSlider</strong>, a general generative pipeline for synthesizing
+              diverse visual worlds along prescribed flight trajectories. Central to our pipeline is a
+              novel appearance-free visual control signal, constructed automatically from metric
+              camera poses, that encodes both the trajectory and its time-varying free-space corridor
+              in a form native to video generative models. To make generation efficient and further
+              improve its fidelity to the prescribed trajectory, we augment few-step distillation with
+              reward learning from a geometry-based camera-motion verifier. We demonstrate the
+              effectiveness of our framework by generating a diverse range of parallel worlds for
+              simulated flights, show its advantages over existing methods in trajectory preservation,
+              and demonstrate cross-domain flight transfer and trajectory-conditioned branching from a
+              shared observation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Method: the control modality                                         -->
+  <!-- ==================================================================== -->
+  <section class="section">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Method</div>
+        <h2 class="title is-3">FlightGrid: an appearance-free flight representation</h2>
+      </div>
+
+      <p class="ws-lead">
+        A flight must be specified to the generator without transferring the world in which it was
+        recorded. Camera parameters specify motion exactly but are foreign to video models; visual
+        references condition densely and naturally, yet necessarily disclose source appearance and
+        geometry. <em>FlightGrid</em> resolves this trade-off as an appearance-free visual control
+        signal constructed automatically from metric camera poses. It comprises a time-indexed flight
+        trace, which preserves the temporal parameterization of the trajectory, and a metric spatial
+        scaffold, which supplies a persistent world reference. The rendered signal contains no RGB
+        pixels, scene depth, object boundaries or semantic labels from the source world.
+      </p>
+
+      <div class="ws-split is-matched" style="--ws-l: 2.58516fr; --ws-r: 2fr">
+
+        <!-- left: the anatomy figure from the paper -->
+        <figure class="ws-figure">
+          <div class="ws-panel-labels is-1"><span>Two flights, decomposed</span></div>
+          <img src="static/images/flightgrid_anatomy.png" width="2405" height="931"
+            alt="Two flights with substantial vertical displacement. Each row pairs a source RGB frame with its FlightGrid, then breaks that FlightGrid into a time-indexed trace, horizontal grids, route-side vertical markers, and adaptive intermediate layers." />
+          <figcaption class="ws-caption" style="margin-top: .75rem">
+            <strong>Appearance-free flight representation.</strong> Two flights with substantial vertical displacement. Each row pairs a source RGB frame with its FlightGrid and its decomposition into a time-indexed trace, horizontal grids, route-side vertical markers and adaptive intermediate layers. Cross-sectional rings are placed at uniform time intervals, so their spatial separation encodes speed and their orientation encodes attitude.
+          </figcaption>
+        </figure>
+
+        <!-- right: how the pairing looks in the training data -->
+        <figure class="ws-figure">
+          <div class="ws-panel-labels is-2">
+            <span>Dataset RGB</span><span class="is-ours">FlightGrid</span>
+          </div>
+          <video id="method-video" data-src="static/videos/flightgrid_pair.mp4"
+            poster="static/images/flightgrid_pair_poster.jpg"
+            width="1280" height="640" muted loop playsinline
+            aria-label="A recorded flight over a castle beside the FlightGrid rendered from its poses, playing in step."></video>
+          <div class="ws-figbar">
+            <button type="button" class="ws-fs" data-target="#method-video">Fullscreen</button>
+            <span>CastleFortress, one of 12,369 curated windows.</span>
+          </div>
+          <figcaption class="ws-caption" style="margin-top: .75rem">
+            <strong>Training pair.</strong> Each of the 12,369 curated windows pairs a recorded flight with the FlightGrid rendered from its poses. Only the latter is supplied to the model; the former is the appearance the model is required to be able to replace.
+          </figcaption>
+        </figure>
+
+      </div>
+
+      <p class="ws-lead" style="margin-top: 3rem">
+        Training proceeds in two stages. <strong>Control adaptation</strong> injects FlightGrid, the
+        first frame and the text condition into a pre-trained video DiT through a VACE-style control
+        branch; the backbone, the VAE and the text encoder remain frozen, so optimization is restricted
+        to the control branch under the conditional rectified-flow objective. The resulting multi-step
+        teacher is then distilled into a few-step student by score-based distribution matching.
+        Following a standard DMD warm-up, a geometry-based verifier recovers the camera trajectory of
+        each student sample and scores its agreement with the prescribed flight; that score, calibrated
+        on the source flight before any generated sample is evaluated, reweights the sample&rsquo;s own
+        DMD update. Distillation thus reduces sampling cost and improves trajectory fidelity under an
+        unchanged teacher-matching objective.
+      </p>
+
+      <figure class="ws-figure is-narrow">
+        <img src="static/images/training_overview.png" width="2402" height="855"
+          alt="Training overview in two panels. Left, control adaptation: FlightGrid and a first frame pass through a frozen VAE into patch embedding and 3D RoPE, entering a frozen Cosmos DiT through a trainable VACE control branch, with the text prompt entering by cross-attention. Right, reward-weighted DMD: a few-step generator produces a sample that is noised and denoised by a frozen target model and a fake-score model to form the DMD gradient, while a trajectory estimator recovers the sample's trajectory and converts its agreement with the prescribed flight into a reward weight applied to that gradient." />
+        <figcaption class="ws-caption" style="margin-top: .75rem">
+          <strong>Training overview.</strong> Left: FlightGrid, the first frame and the prompt enter a
+          frozen Cosmos DiT through a trainable VACE control branch. Right: the few-step
+          generator&rsquo;s samples give the DMD gradient against the frozen target and fake-score
+          models, while a trajectory estimator recovers the flight from that same sample and turns its
+          agreement with the prescribed one into the weight&nbsp;<em>w</em>. Red and gray
+          tokens are noisy and denoised video latents.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Ablations                                                            -->
+  <!-- ==================================================================== -->
+  <section class="section hero is-light">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Ablations</div>
+        <h2 class="title is-3">Ablation of the principal components</h2>
+      </div>
+
+      <p class="ws-lead">
+        The two principal components are ablated independently. For the flight representation, the time-indexed trace (&minus;T), the route-side vertical
+        markers (&minus;M), or the adaptive intermediate layers (&minus;L) are removed while the
+        horizontal grids are retained, and the 35-step adaptation stage is retrained; &minus;ML
+        removes the markers and the layers together.
+        Every removal increases trajectory error relative to the complete representation, the trace
+        contributing most, and the penalty is consistently larger on diverse flights than on standard
+        trajectories &mdash; consistent with the control being relied upon where source appearance is a
+        weak predictor of subsequent motion. For distillation, the verifier is held fixed while the
+        reward temperature is varied, and the temperature is then fixed while verifier capacity is
+        varied; the resulting models are scored with an independent estimator so that the reward is not
+        evaluated against itself. All temperatures exceed the unweighted DMD baseline at convergence,
+        and trajectory error decreases monotonically with verifier capacity.
+      </p>
+
+      <figure class="ws-figure is-narrow">
+        <img src="static/images/core_ablations.png" width="2404" height="614"
+          alt="Three panels. (a) A heatmap of trajectory error ratios for FlightGrid variants against the complete representation at one times, across standard and diverse rotation and translation. (b) Held-out geometry reward against training iterations for three reward temperatures, all ending above a dashed plain-DMD baseline. (c) Rotation and translation error falling as verifier model scale grows from small to base to large." />
+        <figcaption class="ws-caption" style="margin-top: .75rem">
+          <strong>Core ablations.</strong> (a) Trajectory-error ratios for FlightGrid variants, with the
+          complete representation set to 1&times;. &minus;T drops the time-indexed trace, &minus;M the
+          route-side vertical markers, &minus;L the adaptive intermediate layers, and &minus;ML both of
+          the latter two. (b) Held-out geometry reward under different reward-weighting temperatures.
+          (c) Trajectory error from reward verifiers of increasing capacity.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Results: one flight, two worlds                                      -->
+  <!-- ==================================================================== -->
+  <section class="section">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Results</div>
+        <h2 class="title is-3">Parallel worlds along a prescribed flight</h2>
+      </div>
+
+      <p class="ws-lead">
+        The two flights below are specified as trajectories rather than extracted from recordings: a
+        falling-leaf descent and a lazy eight. Each is rendered as FlightGrid and paired with two text
+        conditions naming different target worlds. Between the two generated panels only the world
+        changes; descent rate, roll and the onset of each turn are preserved, since both are
+        conditioned on the same control.
+      </p>
+
+      <div class="ws-grid is-1">
+        <figure class="ws-card is-narrow" style="--ws-max: 800px">
+          <div class="ws-panel-labels is-3">
+            <span>FlightGrid &mdash; Falling Leaf</span>
+            <span class="is-ours">Office</span>
+            <span class="is-ours">Marina Bay</span>
+          </div>
+          <video data-src="static/videos/results/worlds_fallingleaf.mp4"
+            poster="static/images/results/worlds_fallingleaf.jpg"
+            width="1920" height="640" muted loop playsinline
+            aria-label="A falling-leaf descent shown as FlightGrid, then flown through an office interior and over Marina Bay."></video>
+          <figcaption><strong>Falling leaf.</strong> An oscillatory descent, rendered in an office interior and over Marina Bay.</figcaption>
+        </figure>
+
+        <figure class="ws-card is-narrow" style="--ws-max: 800px">
+          <div class="ws-panel-labels is-3">
+            <span>FlightGrid &mdash; Lazy Eight</span>
+            <span class="is-ours">Gardens by the Bay</span>
+            <span class="is-ours">Orchard Road</span>
+          </div>
+          <video data-src="static/videos/results/worlds_lazy8.mp4"
+            poster="static/images/results/worlds_lazy8.jpg"
+            width="1920" height="640" muted loop playsinline
+            aria-label="A lazy-eight manoeuvre shown as FlightGrid, then flown through Gardens by the Bay and along Orchard Road."></video>
+          <figcaption><strong>Lazy eight.</strong> Two linked climbing turns, rendered at Gardens by the Bay and along Orchard Road.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Results: one world, two flights                                      -->
+  <!-- ==================================================================== -->
+  <section class="section hero is-light">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Results</div>
+        <h2 class="title is-3">Trajectory-conditioned branching from a shared observation</h2>
+      </div>
+
+      <p class="ws-lead">
+        The construction inverts. Both branches below are conditioned on a single observation &mdash;
+        the frame at left &mdash; and on two FlightGrids that diverge in heading. Each branch
+        synthesizes a world consistent with that shared observation while revealing only the region its
+        own trajectory traverses.
+      </p>
+
+      <div class="ws-grid is-1">
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-5">
+            <span>Shared first frame</span>
+            <span>Turn left</span><span class="is-ours">Generated</span>
+            <span>Turn right</span><span class="is-ours">Generated</span>
+          </div>
+          <video data-src="static/videos/results/fork_traffic_seasia_street.mp4"
+            poster="static/images/results/fork_traffic_seasia_street.jpg"
+            width="2560" height="512" muted loop playsinline
+            aria-label="From one photograph of a Southeast Asian street, two flights branch: one turning left, one turning right, each generated from its own FlightGrid."></video>
+          <figcaption><strong>Southeast Asian street scene.</strong> Divergent headings from a single street-level observation.</figcaption>
+        </figure>
+
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-5">
+            <span>Shared first frame</span>
+            <span>Turn left</span><span class="is-ours">Generated</span>
+            <span>Turn right</span><span class="is-ours">Generated</span>
+          </div>
+          <video data-src="static/videos/results/fork_restaurant.mp4"
+            poster="static/images/results/fork_restaurant.jpg"
+            width="2560" height="512" muted loop playsinline
+            aria-label="From one photograph of a restaurant interior, two flights branch: one turning left, one turning right, each generated from its own FlightGrid."></video>
+          <figcaption><strong>Restaurant interior.</strong> Divergent headings from a single interior observation.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Comparison against prior camera control                              -->
+  <!-- ==================================================================== -->
+  <section class="section">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Comparison</div>
+        <h2 class="title is-3">Comparison with camera-controlled video generation</h2>
+      </div>
+
+      <p class="ws-lead">
+        All methods are evaluated under a common protocol, with every output rescored by the same ViPE
+        and Q-Align pipeline. On standard trajectories, translation error is comparable across the
+        strongest methods &mdash; 0.097 for WorldSlider against 0.099 for Wan2.1-Fun &mdash; while
+        rotation error already separates, 2.42&deg; against 5.47&deg;. On the held-out diverse flights
+        the methods separate decisively: every baseline falls between 24&deg; and 27&deg; mean geodesic
+        rotation error, whereas WorldSlider attains 6.65&deg; at four denoising function evaluations
+        rather than 25 or 50.
+      </p>
+
+      <div class="ws-tablewrap">
+        <table class="ws-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Method</th>
+              <th rowspan="2">Params.</th>
+              <th rowspan="2">NFE</th>
+              <th colspan="2" class="ws-grp ws-sep">Standard trajectories</th>
+              <th colspan="2" class="ws-grp ws-sep">Diverse flights</th>
+              <th rowspan="2" class="ws-sep">Quality &uarr;</th>
+            </tr>
+            <tr>
+              <th class="ws-sep">Rot. &darr;</th><th>Trans. &darr;</th>
+              <th class="ws-sep">Rot. &darr;</th><th>Trans. &darr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>MotionCtrl</td><td>2B</td><td>25</td><td class="ws-sep">11.34</td><td>0.233</td><td class="ws-sep">27.04</td><td>0.441</td><td class="ws-sep">3.20</td></tr>
+            <tr><td>CameraCtrl</td><td>2B</td><td>25</td><td class="ws-sep">5.47</td><td>0.106</td><td class="ws-sep">26.72</td><td>0.471</td><td class="ws-sep">3.15</td></tr>
+            <tr><td>RealCam-I2V</td><td>1.4B</td><td>25</td><td class="ws-sep">7.66</td><td>0.129</td><td class="ws-sep">24.37</td><td>0.428</td><td class="ws-sep">2.76</td></tr>
+            <tr><td>Wan2.1-Fun</td><td>1.3B</td><td>50</td><td class="ws-sep">5.71</td><td>0.099</td><td class="ws-sep">26.49</td><td>0.410</td><td class="ws-sep">3.22</td></tr>
+            <tr><td><strong>WorldSlider</strong></td><td>2B</td><td>4</td><td class="ws-sep">2.42</td><td>0.097</td><td class="ws-sep">6.65</td><td>0.101</td><td class="ws-sep">3.47</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ws-caption" style="max-width: 940px; margin: .75rem auto 0">
+        Rotation is the mean geodesic error in degrees; translation is the mean scale-normalized
+        trajectory error; quality is the mean Q-Align score over both splits. NFE counts denoising
+        function evaluations.
+      </p>
+
+      <h3 class="ws-subhead">Diverse flights &mdash; TartanAir-V2</h3>
+      <div class="ws-grid is-2">
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/div_apocalyptic.mp4" poster="static/images/compare/div_apocalyptic.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Apocalyptic: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Apocalyptic.</strong> Rapid banking turn through debris.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/div_ruins.mp4" poster="static/images/compare/div_ruins.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Ruins: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Ruins.</strong> Sustained forward descent over ruined structures.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/div_cyberpunkdowntown.mp4" poster="static/images/compare/div_cyberpunkdowntown.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="CyberPunk Downtown: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>CyberPunk Downtown.</strong> Steep descent between towers.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/div_watermillday.mp4" poster="static/images/compare/div_watermillday.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Water Mill: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Water Mill.</strong> Rapid translation over open terrain.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="ws-subhead">Standard trajectories &mdash; RealEstate10K</h3>
+      <div class="ws-grid is-2">
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/std_aadc1e2dc74fd644.mp4" poster="static/images/compare/std_aadc1e2dc74fd644.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Glass courtyard: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Glass courtyard.</strong> Orbital motion about a garden courtyard.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/std_a47b88040452d7d9.mp4" poster="static/images/compare/std_a47b88040452d7d9.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Yellow hallway: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Yellow hallway.</strong> Forward translation along a corridor and through a doorway.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/std_0c4c5d5f751aabf5.mp4" poster="static/images/compare/std_0c4c5d5f751aabf5.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Beamed great room: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Beamed great room.</strong> Forward translation across the room toward the terrace.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/std_6558c5f10d45a929.mp4" poster="static/images/compare/std_6558c5f10d45a929.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Bay-window sitting room: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Bay-window sitting room.</strong> Forward translation terminating at the bay window.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/std_67a69088a2695987.mp4" poster="static/images/compare/std_67a69088a2695987.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Reading corner: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Reading corner.</strong> Forward translation into the corner of the room.</figcaption>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-3">
+            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
+          </div>
+          <video data-src="static/videos/compare/std_fea544b472e9abd1.mp4" poster="static/images/compare/std_fea544b472e9abd1.jpg"
+            width="1536" height="512" muted loop playsinline
+            aria-label="Covered porch: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
+          <figcaption><strong>Covered porch.</strong> Forward translation along a covered deck.</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Outlook                                                              -->
+  <!-- ==================================================================== -->
+  <section class="section hero is-light">
+    <div class="ws-wide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Discussion</div>
+        <h2 class="title is-3">Downstream application: visual robustness for flight policies</h2>
+      </div>
+
+      <p class="ws-lead">
+        Because a parallel world preserves the trajectory that generated it, the action labels of the
+        source flight remain valid in the synthesized video. A single recorded flight therefore yields
+        a family of visually distinct training examples, under illumination, geometry and scene
+        identity the vehicle has never encountered. We intend to pursue this as the principal
+        downstream application of the framework: visual robustness for flight control policies, and
+        more broadly for embodied agents, for which deployment in an unfamiliar environment should
+        constitute a change of appearance rather than a distribution shift.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- BibTeX                                                               -->
+  <!-- ==================================================================== -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3">BibTeX</h2>
+      <pre><code>@inproceedings{worldslider,
+  title     = {Generating Parallel Worlds of a Flight},
+  author    = {Anonymous Authors},
+  booktitle = {TODO},
+  year      = {2027}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p style="font-size: .85rem; color: #6b7280">
+              Page built from the
+              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic
+                Project Page Template</a>, itself adapted from
+              <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Content licensed under
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
