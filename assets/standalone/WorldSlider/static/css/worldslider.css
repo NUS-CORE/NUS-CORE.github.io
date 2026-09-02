@@ -135,13 +135,12 @@ body { color: var(--ws-ink); }
 
 /* the opening paragraph that frames the teaser */
 .ws-lead {
-  max-width: 66ch; margin: 0 auto 2rem;
+  /* 744px is what the abstract actually measures: Bulma caps .is-max-desktop at
+     960, .is-four-fifths takes 80% of it, less the column padding. Justified and
+     un-hyphenated, exactly as the abstract is. */
+  max-width: 744px; margin: 0 auto 2rem;
   font-size: 1.06rem; line-height: 1.7; color: #3b4049;
-  /* justified to match the abstract; hyphenation keeps the word spacing even
-     rather than opening rivers down the column */
   text-align: justify;
-  -webkit-hyphens: auto;
-  hyphens: auto;
 }
 .ws-lead em { font-style: italic; font-weight: 600; color: var(--ws-ink); }
 
