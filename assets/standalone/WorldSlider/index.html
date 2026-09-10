@@ -652,24 +652,75 @@
   </section>
 
   <!-- ==================================================================== -->
-  <!-- Outlook                                                              -->
+  <!-- Application: visual diversification for flight policies              -->
   <!-- ==================================================================== -->
   <section class="section hero is-light">
-    <div class="ws-wide">
+    <div class="ws-wide is-xwide">
       <div class="ws-section-head">
-        <div class="ws-kicker">Discussion</div>
-        <h2 class="title is-3">Downstream application: visual robustness for flight policies</h2>
+        <div class="ws-kicker">Application</div>
+        <h2 class="title is-3">Visual diversification for flight policies</h2>
       </div>
 
       <p class="ws-lead">
         Because a parallel world preserves the trajectory that generated it, the action labels of the
-        source flight remain valid in the synthesized video. A single recorded flight therefore yields
-        a family of visually distinct training examples, under illumination, geometry and scene
-        identity the vehicle has never encountered. We intend to pursue this as the principal
-        downstream application of the framework: visual robustness for flight control policies, and
-        more broadly for embodied agents, for which deployment in an unfamiliar environment should
-        constitute a change of appearance rather than a distribution shift.
+        source flight remain valid in the synthesized video. Simulator domain randomization varies
+        illumination, gate appearance and background; WorldSlider instead generates complete,
+        task-consistent environments around a fixed flight, which we term <em>visual
+        diversification</em>. It expands coherent policy experience without constructing and rendering
+        each training environment by hand. In Isaac Sim we build a three-gate direct course, a
+        three-gate loop and a four-gate direct course, and collect 50 expert trajectories per course.
+        An imitation-learning policy maps egocentric RGB observations to short waypoint sequences
+        executed by a low-level controller; its architecture and demonstrations are held fixed while
+        only the observations vary &mdash; original, simulator-randomized, or WorldSlider-generated.
+        Across 50 trials per course, WorldSlider attains the highest success rate throughout and
+        exceeds simulator randomization by 28 percentage points on the four-gate direct course. The
+        widening margin indicates that visual diversification becomes more beneficial as course
+        difficulty increases.
       </p>
+
+      <figure class="ws-figure is-narrow" style="--ws-max: 800px">
+        <img src="static/images/flight_policy.png" width="2390" height="739"
+          alt="Three panels. (a) A quadrotor threading three square gates along a dotted path. (b) Success rate per course for policies trained on original, simulator-randomized and WorldSlider observations; WorldSlider is highest on every course and the margin widens on the four-gate course. (c) Six gate scenes generated from the same flight: meadow, desert, park, seashore, plaza and a lake." />
+        <figcaption class="ws-caption" style="margin-top: .75rem">
+          <strong>Visual diversification for gate traversal.</strong> (a) Gate traversal. (b) Policy
+          success under the three training conditions. (c) Task-consistent worlds generated from the
+          same flight.
+        </figcaption>
+      </figure>
+
+      <h3 class="ws-subhead">Policy rollouts</h3>
+      <div class="ws-carousel is-narrow ws-figure" style="--ws-max: 500px" data-carousel aria-roledescription="carousel"
+        aria-label="Policy rollouts, one course at a time">
+        <div class="ws-carousel-viewport">
+          <div class="ws-carousel-track">
+            <figure class="ws-slide">
+              <video data-src="static/videos/policy/3gate_direct.mp4" poster="static/images/policy/3gate_direct.jpg"
+                width="1528" height="820" muted loop playsinline
+                aria-label="Policy rollout on the three-gate direct course."></video>
+              <figcaption><strong>Three-gate direct course.</strong></figcaption>
+            </figure>
+            <figure class="ws-slide">
+              <video data-src="static/videos/policy/3gate_loop.mp4" poster="static/images/policy/3gate_loop.jpg"
+                width="1528" height="820" muted loop playsinline
+                aria-label="Policy rollout on the three-gate loop course."></video>
+              <figcaption><strong>Three-gate loop course.</strong></figcaption>
+            </figure>
+            <figure class="ws-slide">
+              <video data-src="static/videos/policy/4gate_direct.mp4" poster="static/images/policy/4gate_direct.jpg"
+                width="1528" height="820" muted loop playsinline
+                aria-label="Policy rollout on the four-gate direct course."></video>
+              <figcaption><strong>Four-gate direct course.</strong></figcaption>
+            </figure>
+          </div>
+        </div>
+        <button type="button" class="ws-carousel-btn is-prev" aria-label="Previous course">&lsaquo;</button>
+        <button type="button" class="ws-carousel-btn is-next" aria-label="Next course">&rsaquo;</button>
+        <div class="ws-carousel-nav" role="tablist">
+          <button type="button" class="ws-tab is-active">3-Gate Direct</button>
+          <button type="button" class="ws-tab">3-Gate Loop</button>
+          <button type="button" class="ws-tab">4-Gate Direct</button>
+        </div>
+      </div>
     </div>
   </section>
 

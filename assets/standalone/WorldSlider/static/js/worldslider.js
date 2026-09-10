@@ -93,10 +93,65 @@
     });
   }
 
+  /* Carousel: <div class="ws-carousel" data-carousel> holding a .ws-carousel-track of
+     .ws-slide figures, prev/next buttons and a .ws-carousel-nav of .ws-tab buttons.
+     Off-screen slides are clipped by the viewport, so the visibility observer above
+     pauses them and starts the one slid into view. */
+  function initCarousels() {
+    document.querySelectorAll("[data-carousel]").forEach(function (root) {
+      var track = root.querySelector(".ws-carousel-track");
+      var slides = track.querySelectorAll(".ws-slide");
+      var dots = root.querySelectorAll(".ws-carousel-nav .ws-tab");
+      var viewport = root.querySelector(".ws-carousel-viewport");
+      var index = 0;
+
+      function go(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = "translateX(-" + index * 100 + "%)";
+        dots.forEach(function (d, k) {
+          d.classList.toggle("is-active", k === index);
+          d.setAttribute("aria-pressed", k === index ? "true" : "false");
+        });
+        slides.forEach(function (sl, k) {
+          sl.setAttribute("aria-hidden", k === index ? "false" : "true");
+          var v = sl.querySelector("video");
+          if (v) {
+            if (k === index) { attach(v); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+            else if (!v.paused) v.pause();
+          }
+        });
+      }
+
+      root.querySelector(".is-prev").addEventListener("click", function () { go(index - 1); });
+      root.querySelector(".is-next").addEventListener("click", function () { go(index + 1); });
+      dots.forEach(function (d, k) { d.addEventListener("click", function () { go(k); }); });
+
+      root.tabIndex = 0;
+      root.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") { go(index - 1); e.preventDefault(); }
+        if (e.key === "ArrowRight") { go(index + 1); e.preventDefault(); }
+      });
+
+      /* swipe / drag: commit on a 40px horizontal move, mouse and touch alike */
+      var x0 = null;
+      viewport.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+      viewport.addEventListener("pointerup", function (e) {
+        if (x0 === null) return;
+        var dx = e.clientX - x0; x0 = null;
+        if (dx <= -40) go(index + 1);
+        else if (dx >= 40) go(index - 1);
+      });
+      viewport.addEventListener("pointercancel", function () { x0 = null; });
+
+      go(0);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     register(document);
     initTabs();
     initFigures();
+    initCarousels();
   });
 
   window.WorldSlider = { register: register };
