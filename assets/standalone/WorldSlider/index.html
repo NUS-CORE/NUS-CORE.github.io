@@ -339,7 +339,7 @@
 
       <p class="ws-lead" style="margin-top: 3rem">
         Training proceeds in two stages. <strong>Control adaptation</strong> injects FlightGrid, the
-        first frame and the text condition into a pre-trained video DiT through a VACE-style control
+        first frame and the text condition into a pre-trained video DiT through a ControlNet-style control
         branch; the backbone, the VAE and the text encoder remain frozen, so optimization is restricted
         to the control branch under the conditional rectified-flow objective. The resulting multi-step
         teacher is then distilled into a few-step student by score-based distribution matching.
@@ -352,10 +352,10 @@
 
       <figure class="ws-figure is-narrow">
         <img src="static/images/training_overview.png" width="2402" height="855"
-          alt="Training overview in two panels. Left, control adaptation: FlightGrid and a first frame pass through a frozen VAE into patch embedding and 3D RoPE, entering a frozen Cosmos DiT through a trainable VACE control branch, with the text prompt entering by cross-attention. Right, reward-weighted DMD: a few-step generator produces a sample that is noised and denoised by a frozen target model and a fake-score model to form the DMD gradient, while a trajectory estimator recovers the sample's trajectory and converts its agreement with the prescribed flight into a reward weight applied to that gradient." />
+          alt="Training overview in two panels. Left, control adaptation: FlightGrid and a first frame pass through a frozen VAE into patch embedding and 3D RoPE, entering a frozen Cosmos DiT through a trainable ControlNet branch, with the text prompt entering by cross-attention. Right, reward-weighted DMD: a few-step generator produces a sample that is noised and denoised by a frozen target model and a fake-score model to form the DMD gradient, while a trajectory estimator recovers the sample's trajectory and converts its agreement with the prescribed flight into a reward weight applied to that gradient." />
         <figcaption class="ws-caption" style="margin-top: .75rem">
           <strong>Training overview.</strong> Left: FlightGrid, the first frame and the prompt enter a
-          frozen Cosmos DiT through a trainable VACE control branch. Right: the few-step
+          frozen Cosmos DiT through a trainable ControlNet branch. Right: the few-step
           generator&rsquo;s samples give the DMD gradient against the frozen target and fake-score
           models, while a trajectory estimator recovers the flight from that same sample and turns its
           agreement with the prescribed one into the weight&nbsp;<em>w</em>. Red and gray
