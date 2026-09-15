@@ -258,3 +258,5 @@ body { color: var(--ws-ink); }
 .ws-c1-legend .l-pre { color: #000; } .ws-c1-legend .l-ws { color: #2a78d6; } .ws-c1-legend .l-wp { color: #eb6834; }
 .ws-c1-legend .l-wan { color: #1baf7a; } .ws-c1-legend .l-cc { color: #eda100; } .ws-c1-legend .l-mc { color: #e87ba4; } .ws-c1-legend .l-rc { color: #4a3aa7; }
 @media (max-width: 760px) { .ws-c1, .ws-c2 { grid-template-columns: 1fr; } .ws-c1-traj, .ws-c2-traj { max-width: 360px; margin: 0 auto; } }
+.ws-c1v2 { display: flex; flex-direction: column; }
+.ws-c1v2 .ws-c1-legend { justify-content: flex-start; padding-left: 2%; }
