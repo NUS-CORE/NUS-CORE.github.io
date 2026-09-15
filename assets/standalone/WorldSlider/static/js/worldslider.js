@@ -147,7 +147,21 @@
     });
   }
 
+  /* Rows of one comparison ([data-sync] figure) play in step: whenever one starts,
+     the others jump to its time. */
+  function initSync() {
+    document.querySelectorAll("[data-sync]").forEach(function (fig) {
+      var vids = fig.querySelectorAll("video");
+      vids.forEach(function (v) {
+        v.addEventListener("play", function () {
+          vids.forEach(function (o) { if (o !== v && Math.abs(o.currentTime - v.currentTime) > 0.15) o.currentTime = v.currentTime; });
+        });
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    initSync();
     register(document);
     initTabs();
     initFigures();
