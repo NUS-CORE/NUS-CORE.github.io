@@ -583,7 +583,8 @@
       <p class="ws-caption" style="max-width: 940px; margin: .75rem auto 0">
         Rotation is the mean geodesic error in degrees; translation is the mean scale-normalized
         trajectory error; quality is the mean Q-Align score over both splits. NFE counts denoising
-        function evaluations.
+        function evaluations. Standard: 50 RealEstate10K trajectories; Diverse: 50 TartanAir-V2
+        flights.
       </p>
 
       <h3 class="ws-subhead">Diverse flights &mdash; TartanAir-V2</h3>
@@ -792,14 +793,16 @@
         task-consistent environments around a fixed flight, which we term <em>visual
         diversification</em>. It expands coherent policy experience without constructing and rendering
         each training environment by hand. In Isaac Sim we build a three-gate direct course, a
-        three-gate loop and a four-gate direct course, and collect 50 expert trajectories per course.
+        three-gate loop and a four-gate direct course, and collect 20 expert trajectories per course.
         An imitation-learning policy maps egocentric RGB observations to short waypoint sequences
-        executed by a low-level controller; its architecture and demonstrations are held fixed while
-        only the observations vary &mdash; original, simulator-randomized, or WorldSlider-generated.
-        Across 50 trials per course, WorldSlider attains the highest success rate throughout and
-        exceeds simulator randomization by 28 percentage points on the four-gate direct course. The
-        widening margin indicates that visual diversification becomes more beneficial as course
-        difficulty increases.
+        executed by a low-level controller; its architecture, trajectory labels and training budget
+        are held fixed while only the observations vary. The original condition repeats each
+        demonstration ten times; simulator randomization and WorldSlider instead provide ten visual
+        variants of every demonstration, so every condition trains on 200 sequences per course with
+        identical trajectory supervision. For every condition and course, five policies are each
+        evaluated over 20 rollouts, and a rollout succeeds only if all gates are traversed without
+        collision. WorldSlider attains the highest success rate throughout and exceeds simulator
+        randomization by 28 percentage points on the three-gate loop course.
       </p>
 
       <figure class="ws-figure is-narrow" style="--ws-max: 800px">
@@ -844,6 +847,75 @@
           <button type="button" class="ws-tab">3-Gate Loop</button>
           <button type="button" class="ws-tab">4-Gate Direct</button>
         </div>
+      </div>
+
+      <h3 class="ws-subhead">Diversified gate flights</h3>
+      <p class="ws-caption" style="max-width: 940px; margin: 0 auto 1rem">
+        Recorded gate flights re-rendered in new worlds from an edited first frame, with the gate
+        geometry and the flight preserved. Each clip plays the original recording beside its
+        diversified counterpart, frame-aligned.
+      </p>
+      <div class="ws-grid is-2">
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Underground parking garage</span></div>
+          <video data-src="static/videos/diversify/c3_underground_parking_garage.mp4" poster="static/images/diversify/c3_underground_parking_garage.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into underground parking garage."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Container port at night</span></div>
+          <video data-src="static/videos/diversify/c3_container_port_at_night.mp4" poster="static/images/diversify/c3_container_port_at_night.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into container port at night."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Spring wildflower meadow</span></div>
+          <video data-src="static/videos/diversify/c3_spring_wildflower_meadow.mp4" poster="static/images/diversify/c3_spring_wildflower_meadow.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into spring wildflower meadow."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Rainy autumn plaza</span></div>
+          <video data-src="static/videos/diversify/c3_rainy_autumn_plaza.mp4" poster="static/images/diversify/c3_rainy_autumn_plaza.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into rainy autumn plaza."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Tropical terrace after rain</span></div>
+          <video data-src="static/videos/diversify/c3_tropical_terrace_after_rain.mp4" poster="static/images/diversify/c3_tropical_terrace_after_rain.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into tropical terrace after rain."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Snowy field under a full moon</span></div>
+          <video data-src="static/videos/diversify/c3_snowy_field_under_a_full_moon.mp4" poster="static/images/diversify/c3_snowy_field_under_a_full_moon.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into snowy field under a full moon."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Aircraft hangar</span></div>
+          <video data-src="static/videos/diversify/c3_aircraft_hangar.mp4" poster="static/images/diversify/c3_aircraft_hangar.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into aircraft hangar."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Misty bamboo forest</span></div>
+          <video data-src="static/videos/diversify/c3_misty_bamboo_forest.mp4" poster="static/images/diversify/c3_misty_bamboo_forest.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into misty bamboo forest."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Running track at night</span></div>
+          <video data-src="static/videos/diversify/c3_running_track_at_night.mp4" poster="static/images/diversify/c3_running_track_at_night.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into running track at night."></video>
+        </figure>
+        <figure class="ws-card">
+          <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Cherry-blossom park</span></div>
+          <video data-src="static/videos/diversify/c3_cherry_blossom_park.mp4" poster="static/images/diversify/c3_cherry_blossom_park.jpg"
+            width="1024" height="512" muted loop playsinline
+            aria-label="Recorded gate flight beside the same flight diversified into cherry-blossom park."></video>
+        </figure>
       </div>
     </div>
   </section>
