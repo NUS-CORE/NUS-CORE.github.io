@@ -182,7 +182,7 @@ body { color: var(--ws-ink); }
   margin: 2.5rem 0 1rem;
   font-size: .78rem; font-weight: 700;
   letter-spacing: .12em; text-transform: uppercase;
-  color: var(--ws-muted);
+  color: var(--ws-muted); text-align: center;
 }
 
 /* Epigraph: centred, in the serif the template already loads, so it reads as a
@@ -260,3 +260,20 @@ body { color: var(--ws-ink); }
 @media (max-width: 760px) { .ws-c1, .ws-c2 { grid-template-columns: 1fr; } .ws-c1-traj, .ws-c2-traj { max-width: 360px; margin: 0 auto; } }
 .ws-c1v2 { display: flex; flex-direction: column; }
 .ws-c1v2 .ws-c1-legend { justify-content: flex-start; padding-left: 2%; }
+
+/* code block and method-colour legend (README parity) */
+.ws-code {
+  max-width: 940px; margin: 0 auto; padding: .8rem 1rem; overflow-x: auto;
+  background: #f5f5f7; border: 1px solid #e3e3e8; border-radius: 6px;
+}
+.ws-code code { font-size: .9rem; background: none; color: inherit; padding: 0; }
+.ws-swatches img { border-radius: 2px; }
+
+/* one label line only: a wrapping world name used to make its card taller than
+   its neighbours, which knocked the gate-flight grid out of alignment */
+.ws-panel-labels { min-height: 1.15rem; }
+.ws-panel-labels span {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding: 0 .25rem; min-width: 0;
+}
+.ws-grid.is-2 .ws-panel-labels { font-size: .72rem; letter-spacing: .01em; }

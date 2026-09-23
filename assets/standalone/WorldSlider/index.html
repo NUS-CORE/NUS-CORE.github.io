@@ -140,46 +140,42 @@
         </blockquote>
 
         <p class="ws-lead">
-          Consider a flight through a polar research station. The same flight can be revisited under
-          a rose-colored sky, or transferred altogether to a tropical reservoir. The illumination,
-          geometry, and identity of the scene change, yet the flight advances, banks, and turns with
-          the same rhythm. We study the problem of generating these <em>parallel worlds of a
-          flight</em>: visually distinct videos that all fly one prescribed trajectory.
+          A flight is a path through space: where the camera goes, and where it looks, at every moment.
+          Hand a video model that path as numbers and it tends to drift back to the motion it saw in
+          training. So we draw the path instead &mdash; a wireframe control video we call FlightGrid &mdash;
+          and let the model build a world around it. Every clip on this page flies one prescribed path;
+          the worlds are generated. The method and the numbers are in the paper.
         </p>
 
-        <div class="ws-split is-matched" style="--ws-l: 2.59287fr; --ws-r: 1fr">
+        <div class="ws-split is-matched" style="--ws-l: 2.59287fr; --ws-r: 1fr; max-width:1400px; margin-inline:auto">
 
           <!-- left: the static teaser figure -->
           <figure class="ws-figure">
             <div class="ws-panel-labels is-1"><span>Synchronized timesteps</span></div>
-            <img src="static/images/teaser.png" width="2401" height="926"
+            <img src="static/rm/teaser.png" width="3000" height="1143"
               alt="Four rows of synchronized frames from one flight: the source polar-station flight, its FlightGrid trace, the same flight under a sunset sky, and the same flight transferred to a tropical reservoir. At right, the trajectories recovered from the generated videos are aligned to the source trajectory." />
             <figcaption class="ws-caption" style="margin-top: .75rem">
-              <strong>Rows:</strong> the source flight, its FlightGrid trace, the same flight under a
-              sunset sky, and the same flight in a tropical reservoir. Columns are synchronized
-              timesteps. At right, the trajectory recovered from each generated video, aligned to the
-              source trajectory.
+              <strong>Rows:</strong> source flight &middot; FlightGrid &middot; sunset revisit &middot;
+              reservoir transfer. Columns are the same timesteps; at right, the recovered trajectories.
             </figcaption>
           </figure>
 
           <!-- right: the same idea, moving. Square, so it needs a ceiling for when
                the row collapses to a single column. -->
-          <figure class="ws-figure is-narrow" style="--ws-max: 800px">
+          <figure class="ws-figure is-narrow" style="--ws-max: 600px">
             <div class="ws-panel-labels is-3">
               <span>First frame</span><span>FlightGrid</span><span class="is-ours">Video</span>
             </div>
-            <video id="teaser-video" data-src="static/videos/teaser.mp4"
-              poster="static/images/teaser_poster.jpg"
-              width="1920" height="1920" muted loop playsinline
+            <video id="teaser-video" data-src="static/rm/teaser.mp4"
+              poster="static/rm/teaser.jpg"
+              width="600" height="600" muted loop playsinline
               aria-label="Three worlds along one polar flight, each shown as first frame, FlightGrid control, and video."></video>
             <div class="ws-figbar">
               <button type="button" class="ws-fs" data-target="#teaser-video">Fullscreen</button>
               <span>Nine tiles in one square &mdash; open it large to read them.</span>
             </div>
             <figcaption class="ws-caption" style="margin-top: .75rem">
-              <strong>The same three worlds, moving.</strong> Each row shows the frozen first frame,
-              the FlightGrid it follows, and the resulting video &mdash; the source flight on top, the
-              sunset revisit and the reservoir transfer below.
+              <strong>The same three worlds, moving.</strong> Per row: first frame, FlightGrid, video.
             </figcaption>
           </figure>
 
@@ -189,372 +185,16 @@
   </section>
 
   <!-- ==================================================================== -->
-  <!-- Motivation: where existing camera control breaks down                -->
+  <!-- Comparison with camera-controlled video generation                   -->
   <!-- ==================================================================== -->
   <section class="section">
     <div class="ws-wide is-xwide">
       <div class="ws-section-head">
-        <div class="ws-kicker">Motivation</div>
-        <h2 class="title is-3">Limitations of parameter-conditioned camera control</h2>
-      </div>
-
-      <p class="ws-lead">
-        Camera-conditioned video generation is well established, but existing methods are developed
-        and evaluated predominantly on smooth, canonical trajectories. Under the compound motion of an
-        executed flight &mdash; simultaneous translation, rotation, speed variation and altitude change
-        &mdash; control degrades substantially. Below, Wan2.1-Fun-CC and RealCam-I2V are conditioned on
-        the trajectory of the reference flight shown at left. The recovered camera motion departs from
-        the prescribed path, and appearance degrades as the model reconciles a trajectory it cannot
-        realize. We attribute this in part to the form of the conditioning signal: numeric camera
-        parameters enter the generator as an auxiliary embedding rather than in the modality through
-        which it represents scene motion. This motivates an explicitly visual control.
-      </p>
-
-      <div class="ws-grid is-2">
-          <figure class="ws-card">
-            <div class="ws-panel-labels is-3">
-              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-            </div>
-            <video data-src="static/videos/failure/apocalyptic.mp4" poster="static/images/failure/apocalyptic.jpg"
-              width="1536" height="512" muted loop playsinline
-              aria-label="Apocalyptic: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
-            <figcaption><strong>Apocalyptic.</strong> Rapid banking turn through debris.</figcaption>
-          </figure>
-          <figure class="ws-card">
-            <div class="ws-panel-labels is-3">
-              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-            </div>
-            <video data-src="static/videos/failure/ruins.mp4" poster="static/images/failure/ruins.jpg"
-              width="1536" height="512" muted loop playsinline
-              aria-label="Ruins: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
-            <figcaption><strong>Ruins.</strong> Sustained forward descent over ruined structures.</figcaption>
-          </figure>
-          <figure class="ws-card">
-            <div class="ws-panel-labels is-3">
-              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-            </div>
-            <video data-src="static/videos/failure/seasonalforestautumn.mp4" poster="static/images/failure/seasonalforestautumn.jpg"
-              width="1536" height="512" muted loop playsinline
-              aria-label="Autumn forest: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
-            <figcaption><strong>Autumn forest.</strong> Descent with sustained rotation, from the horizon down onto the slope.</figcaption>
-          </figure>
-          <figure class="ws-card">
-            <div class="ws-panel-labels is-3">
-              <span>Reference</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-            </div>
-            <video data-src="static/videos/failure/watermillday.mp4" poster="static/images/failure/watermillday.jpg"
-              width="1536" height="512" muted loop playsinline
-              aria-label="Water Mill: the reference flight, beside what Wan2.1-Fun-CC and RealCam-I2V generate for the same trajectory."></video>
-            <figcaption><strong>Water Mill.</strong> Rapid translation over open terrain.</figcaption>
-          </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================================================================== -->
-  <!-- Abstract                                                             -->
-  <!-- ==================================================================== -->
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              We study the problem of generating <em>parallel worlds of a flight</em> &mdash; visually
-              distinct videos that share the same flight trajectory &mdash; from pre-trained video
-              generative models. Controlling such generation presents an inherent trade-off: camera
-              parameters specify motion precisely but are foreign to video models, while visual
-              references are easy to condition on but reveal the original world. To bridge this gap,
-              we present <strong>WorldSlider</strong>, a general generative pipeline for synthesizing
-              diverse visual worlds along prescribed flight trajectories. Central to our pipeline is a
-              novel appearance-free visual control signal, constructed automatically from metric
-              camera poses, that encodes both the trajectory and its time-varying free-space corridor
-              in a form native to video generative models. To make generation efficient and further
-              improve its fidelity to the prescribed trajectory, we augment few-step distillation with
-              reward learning from a geometry-based camera-motion verifier. We demonstrate the
-              effectiveness of our framework by generating a diverse range of parallel worlds for
-              simulated flights, show its advantages over existing methods in trajectory preservation,
-              and demonstrate cross-domain flight transfer and trajectory-conditioned branching from a
-              shared observation.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================================================================== -->
-  <!-- Method: the control modality                                         -->
-  <!-- ==================================================================== -->
-  <section class="section">
-    <div class="ws-wide is-xwide">
-      <div class="ws-section-head">
-        <div class="ws-kicker">Method</div>
-        <h2 class="title is-3">FlightGrid: an appearance-free flight representation</h2>
-      </div>
-
-      <p class="ws-lead">
-        A flight must be specified to the generator without transferring the world in which it was
-        recorded. Camera parameters specify motion exactly but are foreign to video models; visual
-        references condition densely and naturally, yet necessarily disclose source appearance and
-        geometry. <em>FlightGrid</em> resolves this trade-off as an appearance-free visual control
-        signal constructed automatically from metric camera poses. It comprises a time-indexed flight
-        trace, which preserves the temporal parameterization of the trajectory, and a metric spatial
-        scaffold, which supplies a persistent world reference. The rendered signal contains no RGB
-        pixels, scene depth, object boundaries or semantic labels from the source world.
-      </p>
-
-      <div class="ws-split is-matched" style="--ws-l: 2.58516fr; --ws-r: 2fr">
-
-        <!-- left: the anatomy figure from the paper -->
-        <figure class="ws-figure">
-          <div class="ws-panel-labels is-1"><span>Two flights, decomposed</span></div>
-          <img src="static/images/flightgrid_anatomy.png" width="2405" height="931"
-            alt="Two flights with substantial vertical displacement. Each row pairs a source RGB frame with its FlightGrid, then breaks that FlightGrid into a time-indexed trace, horizontal grids, route-side vertical markers, and adaptive intermediate layers." />
-          <figcaption class="ws-caption" style="margin-top: .75rem">
-            <strong>Appearance-free flight representation.</strong> Two flights with substantial vertical displacement. Each row pairs a source RGB frame with its FlightGrid and its decomposition into a time-indexed trace, horizontal grids, route-side vertical markers and adaptive intermediate layers. Cross-sectional rings are placed at uniform time intervals, so their spatial separation encodes speed and their orientation encodes attitude.
-          </figcaption>
-        </figure>
-
-        <!-- right: how the pairing looks in the training data -->
-        <figure class="ws-figure">
-          <div class="ws-panel-labels is-2">
-            <span>Dataset RGB</span><span class="is-ours">FlightGrid</span>
-          </div>
-          <video id="method-video" data-src="static/videos/flightgrid_pair.mp4"
-            poster="static/images/flightgrid_pair_poster.jpg"
-            width="1280" height="640" muted loop playsinline
-            aria-label="A recorded flight over a castle beside the FlightGrid rendered from its poses, playing in step."></video>
-          <div class="ws-figbar">
-            <button type="button" class="ws-fs" data-target="#method-video">Fullscreen</button>
-            <span>CastleFortress, one of 12,369 curated windows.</span>
-          </div>
-          <figcaption class="ws-caption" style="margin-top: .75rem">
-            <strong>Training pair.</strong> Each of the 12,369 curated windows pairs a recorded flight with the FlightGrid rendered from its poses. Only the latter is supplied to the model; the former is the appearance the model is required to be able to replace.
-          </figcaption>
-        </figure>
-
-      </div>
-
-      <p class="ws-lead" style="margin-top: 3rem">
-        Training proceeds in two stages. <strong>Control adaptation</strong> injects FlightGrid, the
-        first frame and the text condition into a pre-trained video DiT through a ControlNet-style control
-        branch; the backbone, the VAE and the text encoder remain frozen, so optimization is restricted
-        to the control branch under the conditional rectified-flow objective. The resulting multi-step
-        teacher is then distilled into a few-step student by score-based distribution matching.
-        Following a standard DMD warm-up, a geometry-based verifier recovers the camera trajectory of
-        each student sample and scores its agreement with the prescribed flight; that score, calibrated
-        on the source flight before any generated sample is evaluated, reweights the sample&rsquo;s own
-        DMD update. Distillation thus reduces sampling cost and improves trajectory fidelity under an
-        unchanged teacher-matching objective.
-      </p>
-
-      <figure class="ws-figure is-narrow">
-        <img src="static/images/training_overview.png" width="2402" height="855"
-          alt="Training overview in two panels. Left, control adaptation: FlightGrid and a first frame pass through a frozen VAE into patch embedding and 3D RoPE, entering a frozen Cosmos DiT through a trainable ControlNet branch, with the text prompt entering by cross-attention. Right, reward-weighted DMD: a few-step generator produces a sample that is noised and denoised by a frozen target model and a fake-score model to form the DMD gradient, while a trajectory estimator recovers the sample's trajectory and converts its agreement with the prescribed flight into a reward weight applied to that gradient." />
-        <figcaption class="ws-caption" style="margin-top: .75rem">
-          <strong>Training overview.</strong> Left: FlightGrid, the first frame and the prompt enter a
-          frozen Cosmos DiT through a trainable ControlNet branch. Right: the few-step
-          generator&rsquo;s samples give the DMD gradient against the frozen target and fake-score
-          models, while a trajectory estimator recovers the flight from that same sample and turns its
-          agreement with the prescribed one into the weight&nbsp;<em>w</em>. Red and gray
-          tokens are noisy and denoised video latents.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ==================================================================== -->
-  <!-- Ablations                                                            -->
-  <!-- ==================================================================== -->
-  <section class="section hero is-light">
-    <div class="ws-wide is-xwide">
-      <div class="ws-section-head">
-        <div class="ws-kicker">Ablations</div>
-        <h2 class="title is-3">Ablation of the principal components</h2>
-      </div>
-
-      <p class="ws-lead">
-        The two principal components are ablated independently. For the flight representation, the time-indexed trace (&minus;T), the route-side vertical
-        markers (&minus;M), or the adaptive intermediate layers (&minus;L) are removed while the
-        horizontal grids are retained, and the 35-step adaptation stage is retrained; &minus;ML
-        removes the markers and the layers together.
-        Every removal increases trajectory error relative to the complete representation, the trace
-        contributing most, and the penalty is consistently larger on diverse flights than on standard
-        trajectories &mdash; consistent with the control being relied upon where source appearance is a
-        weak predictor of subsequent motion. For distillation, the verifier is held fixed while the
-        reward temperature is varied, and the temperature is then fixed while verifier capacity is
-        varied; the resulting models are scored with an independent estimator so that the reward is not
-        evaluated against itself. All temperatures exceed the unweighted DMD baseline at convergence,
-        and trajectory error decreases monotonically with verifier capacity.
-      </p>
-
-      <figure class="ws-figure is-narrow">
-        <img src="static/images/core_ablations.png" width="2404" height="614"
-          alt="Three panels. (a) A heatmap of trajectory error ratios for FlightGrid variants against the complete representation at one times, across standard and diverse rotation and translation. (b) Held-out geometry reward against training iterations for three reward temperatures, all ending above a dashed plain-DMD baseline. (c) Rotation and translation error falling as verifier model scale grows from small to base to large." />
-        <figcaption class="ws-caption" style="margin-top: .75rem">
-          <strong>Core ablations.</strong> (a) Trajectory-error ratios for FlightGrid variants, with the
-          complete representation set to 1&times;. &minus;T drops the time-indexed trace, &minus;M the
-          route-side vertical markers, &minus;L the adaptive intermediate layers, and &minus;ML both of
-          the latter two. (b) Held-out geometry reward under different reward-weighting temperatures.
-          (c) Trajectory error from reward verifiers of increasing capacity.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ==================================================================== -->
-  <!-- Results: one flight, two worlds                                      -->
-  <!-- ==================================================================== -->
-  <section class="section">
-    <div class="ws-wide is-xwide">
-      <div class="ws-section-head">
-        <div class="ws-kicker">Results</div>
-        <h2 class="title is-3">Parallel worlds along a prescribed flight</h2>
-      </div>
-
-      <p class="ws-lead">
-        The two flights below are specified as trajectories rather than extracted from recordings: a
-        falling-leaf descent and a lazy eight. Each is rendered as FlightGrid and paired with two text
-        conditions naming different target worlds. Between the two generated panels only the world
-        changes; descent rate, roll and the onset of each turn are preserved, since both are
-        conditioned on the same control.
-      </p>
-
-      <div class="ws-grid is-1">
-        <figure class="ws-card is-narrow" style="--ws-max: 800px">
-          <div class="ws-panel-labels is-3">
-            <span>FlightGrid &mdash; Falling Leaf</span>
-            <span class="is-ours">Office</span>
-            <span class="is-ours">Marina Bay</span>
-          </div>
-          <video data-src="static/videos/results/worlds_fallingleaf.mp4"
-            poster="static/images/results/worlds_fallingleaf.jpg"
-            width="1920" height="640" muted loop playsinline
-            aria-label="A falling-leaf descent shown as FlightGrid, then flown through an office interior and over Marina Bay."></video>
-          <figcaption><strong>Falling leaf.</strong> An oscillatory descent, rendered in an office interior and over Marina Bay.</figcaption>
-        </figure>
-
-        <figure class="ws-card is-narrow" style="--ws-max: 800px">
-          <div class="ws-panel-labels is-3">
-            <span>FlightGrid &mdash; Lazy Eight</span>
-            <span class="is-ours">Gardens by the Bay</span>
-            <span class="is-ours">Orchard Road</span>
-          </div>
-          <video data-src="static/videos/results/worlds_lazy8.mp4"
-            poster="static/images/results/worlds_lazy8.jpg"
-            width="1920" height="640" muted loop playsinline
-            aria-label="A lazy-eight manoeuvre shown as FlightGrid, then flown through Gardens by the Bay and along Orchard Road."></video>
-          <figcaption><strong>Lazy eight.</strong> Two linked climbing turns, rendered at Gardens by the Bay and along Orchard Road.</figcaption>
-        </figure>
-      </div>
-
-      <h3 class="ws-subhead">Further flights in three worlds each</h3>
-      <div class="ws-grid is-1">
-        <figure class="ws-card ws-c2">
-          <div class="ws-c2-traj"><img src="static/images/appendix/c2_arc_turn_traj.png" alt="Prescribed flight: Arc turn." loading="lazy"></div>
-          <div class="ws-c2-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Old town</span><span class="is-ours">Living room</span><span class="is-ours">Log cabin</span></div>
-            <video data-src="static/videos/appendix/c2_arc_turn.mp4" poster="static/images/appendix/c2_arc_turn.jpg" width="2048" height="512" muted loop playsinline aria-label="Arc turn flown in three worlds: Old town, Living room, Log cabin."></video>
-          </div>
-          <figcaption><strong>Arc turn.</strong> One prescribed flight, three worlds; only the first frame and the text change.</figcaption>
-        </figure>
-        <figure class="ws-card ws-c2">
-          <div class="ws-c2-traj"><img src="static/images/appendix/c2_swoop_traj.png" alt="Prescribed flight: Swoop." loading="lazy"></div>
-          <div class="ws-c2-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Living room</span><span class="is-ours">Retro office</span><span class="is-ours">Sewer</span></div>
-            <video data-src="static/videos/appendix/c2_swoop.mp4" poster="static/images/appendix/c2_swoop.jpg" width="2048" height="512" muted loop playsinline aria-label="Swoop flown in three worlds: Living room, Retro office, Sewer."></video>
-          </div>
-          <figcaption><strong>Swoop.</strong> One prescribed flight, three worlds; only the first frame and the text change.</figcaption>
-        </figure>
-        <figure class="ws-card ws-c2">
-          <div class="ws-c2-traj"><img src="static/images/appendix/c2_wingover_traj.png" alt="Prescribed flight: Wingover." loading="lazy"></div>
-          <div class="ws-c2-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Diner</span><span class="is-ours">Restaurant</span><span class="is-ours">Sewer</span></div>
-            <video data-src="static/videos/appendix/c2_wingover.mp4" poster="static/images/appendix/c2_wingover.jpg" width="2048" height="512" muted loop playsinline aria-label="Wingover flown in three worlds: Diner, Restaurant, Sewer."></video>
-          </div>
-          <figcaption><strong>Wingover.</strong> One prescribed flight, three worlds; only the first frame and the text change.</figcaption>
-        </figure>
-        <figure class="ws-card ws-c2">
-          <div class="ws-c2-traj"><img src="static/images/appendix/c2_rise_and_reveal_traj.png" alt="Prescribed flight: Rise and reveal." loading="lazy"></div>
-          <div class="ws-c2-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Restaurant</span><span class="is-ours">Retro office</span><span class="is-ours">Kitchen</span></div>
-            <video data-src="static/videos/appendix/c2_rise_and_reveal.mp4" poster="static/images/appendix/c2_rise_and_reveal.jpg" width="2048" height="512" muted loop playsinline aria-label="Rise and reveal flown in three worlds: Restaurant, Retro office, Kitchen."></video>
-          </div>
-          <figcaption><strong>Rise and reveal.</strong> One prescribed flight, three worlds; only the first frame and the text change.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================================================================== -->
-  <!-- Results: one world, two flights                                      -->
-  <!-- ==================================================================== -->
-  <section class="section hero is-light">
-    <div class="ws-wide is-xwide">
-      <div class="ws-section-head">
-        <div class="ws-kicker">Results</div>
-        <h2 class="title is-3">Trajectory-conditioned branching from a shared observation</h2>
-      </div>
-
-      <p class="ws-lead">
-        The construction inverts. Both branches below are conditioned on a single observation &mdash;
-        the frame at left &mdash; and on two FlightGrids that diverge in heading. Each branch
-        synthesizes a world consistent with that shared observation while revealing only the region its
-        own trajectory traverses.
-      </p>
-
-      <div class="ws-grid is-1">
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-5">
-            <span>Shared first frame</span>
-            <span>Turn left</span><span class="is-ours">Generated</span>
-            <span>Turn right</span><span class="is-ours">Generated</span>
-          </div>
-          <video data-src="static/videos/results/fork_traffic_seasia_street.mp4"
-            poster="static/images/results/fork_traffic_seasia_street.jpg"
-            width="2560" height="512" muted loop playsinline
-            aria-label="From one photograph of a Southeast Asian street, two flights branch: one turning left, one turning right, each generated from its own FlightGrid."></video>
-          <figcaption><strong>Southeast Asian street scene.</strong> Divergent headings from a single street-level observation.</figcaption>
-        </figure>
-
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-5">
-            <span>Shared first frame</span>
-            <span>Turn left</span><span class="is-ours">Generated</span>
-            <span>Turn right</span><span class="is-ours">Generated</span>
-          </div>
-          <video data-src="static/videos/results/fork_restaurant.mp4"
-            poster="static/images/results/fork_restaurant.jpg"
-            width="2560" height="512" muted loop playsinline
-            aria-label="From one photograph of a restaurant interior, two flights branch: one turning left, one turning right, each generated from its own FlightGrid."></video>
-          <figcaption><strong>Restaurant interior.</strong> Divergent headings from a single interior observation.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================================================================== -->
-  <!-- Comparison against prior camera control                              -->
-  <!-- ==================================================================== -->
-  <section class="section">
-    <div class="ws-wide is-xwide">
-      <div class="ws-section-head">
-        <div class="ws-kicker">Comparison</div>
+        <div class="ws-kicker">Evaluation</div>
         <h2 class="title is-3">Comparison with camera-controlled video generation</h2>
+        <p class="ws-caption"><sub>Paper: &sect;4.1 Flight Fidelity and Generalization &middot; Appendix A.1 Additional Flight Comparisons</sub></p>
       </div>
-
-      <p class="ws-lead">
-        All methods are evaluated under a common protocol, with every output rescored by the same ViPE
-        and Q-Align pipeline. On standard trajectories, translation error is comparable across the
-        strongest methods &mdash; 0.097 for WorldSlider against 0.099 for Wan2.1-Fun &mdash; while
-        rotation error already separates, 2.42&deg; against 5.47&deg;. On the held-out diverse flights
-        the methods separate decisively: every baseline falls between 24&deg; and 27&deg; mean geodesic
-        rotation error, whereas WorldSlider attains 6.65&deg; at four denoising function evaluations
-        rather than 25 or 50.
-      </p>
-
+<p class="ws-lead">Does drawing the path actually make the model fly it? The comparison is with camera-controlled video generators &mdash; the same task, except they are handed the trajectory as numbers. Each method gets the same first frame, the same prompt and the same seed. We then recover the camera path from every generated video, and measure how far it drifted from the path we asked for. Smooth indoor moves are easy for everyone. Flights that bank, climb and double back are not: the baselines end up 20&deg;&ndash;27&deg; off, WorldSlider 6.65&deg; &mdash; in four steps instead of 25 or 50.</p>
       <div class="ws-tablewrap">
         <table class="ws-table">
           <thead>
@@ -572,351 +212,268 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>MotionCtrl</td><td>2B</td><td>25</td><td class="ws-sep">11.34</td><td>0.233</td><td class="ws-sep">27.04</td><td>0.441</td><td class="ws-sep">3.20</td></tr>
-            <tr><td>CameraCtrl</td><td>2B</td><td>25</td><td class="ws-sep">5.47</td><td>0.106</td><td class="ws-sep">26.72</td><td>0.471</td><td class="ws-sep">3.15</td></tr>
-            <tr><td>RealCam-I2V</td><td>1.4B</td><td>25</td><td class="ws-sep">7.66</td><td>0.129</td><td class="ws-sep">24.37</td><td>0.428</td><td class="ws-sep">2.76</td></tr>
-            <tr><td>Wan2.1-Fun</td><td>1.3B</td><td>50</td><td class="ws-sep">5.71</td><td>0.099</td><td class="ws-sep">26.49</td><td>0.410</td><td class="ws-sep">3.22</td></tr>
-            <tr><td><strong>WorldSlider</strong></td><td>2B</td><td>4</td><td class="ws-sep">2.42</td><td>0.097</td><td class="ws-sep">6.65</td><td>0.101</td><td class="ws-sep">3.47</td></tr>
+            <tr><td>MotionCtrl</td><td>2B</td><td>25</td><td class="ws-sep">11.28</td><td>0.234</td><td class="ws-sep">27.04</td><td>0.441</td><td class="ws-sep">3.20</td></tr>
+            <tr><td>CameraCtrl</td><td>2B</td><td>25</td><td class="ws-sep">5.67</td><td>0.099</td><td class="ws-sep">26.72</td><td>0.471</td><td class="ws-sep">3.15</td></tr>
+            <tr><td>RealCam-I2V</td><td>1.4B</td><td>25</td><td class="ws-sep">7.62</td><td>0.132</td><td class="ws-sep">24.37</td><td>0.428</td><td class="ws-sep">2.76</td></tr>
+            <tr><td>Wan2.1-Camera</td><td>1.3B</td><td>50</td><td class="ws-sep">5.31</td><td>0.097</td><td class="ws-sep">26.49</td><td>0.410</td><td class="ws-sep">3.22</td></tr>
+            <tr><td>HY-WorldPlay</td><td>5B</td><td>4</td><td class="ws-sep">4.11</td><td>0.152</td><td class="ws-sep">19.93</td><td>0.378</td><td class="ws-sep">3.53</td></tr>
+            <tr><td><strong>WorldSlider</strong></td><td>2B</td><td>4</td><td class="ws-sep"><strong>2.52</strong></td><td><strong>0.079</strong></td><td class="ws-sep"><strong>6.65</strong></td><td><strong>0.101</strong></td><td class="ws-sep">3.45</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="ws-caption" style="max-width: 940px; margin: .75rem auto 0">
-        Rotation is the mean geodesic error in degrees; translation is the mean scale-normalized
-        trajectory error; quality is the mean Q-Align score over both splits. NFE counts denoising
-        function evaluations. Standard: 50 RealEstate10K trajectories; Diverse: 50 TartanAir-V2
-        flights.
-      </p>
-
-      <h3 class="ws-subhead">Diverse flights &mdash; TartanAir-V2</h3>
-      <div class="ws-grid is-2">
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/div_apocalyptic.mp4" poster="static/images/compare/div_apocalyptic.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Apocalyptic: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Apocalyptic.</strong> Rapid banking turn through debris.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/div_ruins.mp4" poster="static/images/compare/div_ruins.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Ruins: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Ruins.</strong> Sustained forward descent over ruined structures.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/div_seasonalforestautumn.mp4" poster="static/images/compare/div_seasonalforestautumn.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Autumn forest: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Autumn forest.</strong> Descent with sustained rotation onto the slope.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/div_watermillday.mp4" poster="static/images/compare/div_watermillday.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Water Mill: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Water Mill.</strong> Rapid translation over open terrain.</figcaption>
-        </figure>
-      </div>
-
-      <h3 class="ws-subhead">Standard trajectories &mdash; RealEstate10K</h3>
-      <div class="ws-grid is-2">
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/std_aadc1e2dc74fd644.mp4" poster="static/images/compare/std_aadc1e2dc74fd644.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Glass courtyard: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Glass courtyard.</strong> Orbital motion about a garden courtyard.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/std_a47b88040452d7d9.mp4" poster="static/images/compare/std_a47b88040452d7d9.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Yellow hallway: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Yellow hallway.</strong> Forward translation along a corridor and through a doorway.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/std_0c4c5d5f751aabf5.mp4" poster="static/images/compare/std_0c4c5d5f751aabf5.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Beamed great room: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Beamed great room.</strong> Forward translation across the room toward the terrace.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/std_6558c5f10d45a929.mp4" poster="static/images/compare/std_6558c5f10d45a929.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Bay-window sitting room: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Bay-window sitting room.</strong> Forward translation terminating at the bay window.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/std_67a69088a2695987.mp4" poster="static/images/compare/std_67a69088a2695987.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Reading corner: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Reading corner.</strong> Forward translation into the corner of the room.</figcaption>
-        </figure>
-        <figure class="ws-card">
-          <div class="ws-panel-labels is-3">
-            <span class="is-ours">WorldSlider (ours)</span><span>Wan2.1-Fun-CC</span><span>RealCam-I2V</span>
-          </div>
-          <video data-src="static/videos/compare/std_fea544b472e9abd1.mp4" poster="static/images/compare/std_fea544b472e9abd1.jpg"
-            width="1536" height="512" muted loop playsinline
-            aria-label="Covered porch: the same prescribed flight generated by WorldSlider, Wan2.1-Fun-CC and RealCam-I2V."></video>
-          <figcaption><strong>Covered porch.</strong> Forward translation along a covered deck.</figcaption>
-        </figure>
-      </div>
+      <p class="ws-caption" style="max-width: 940px; margin: .75rem auto 0">Rotation: how far the camera angles drift, in degrees. Translation: the same for position, after removing scale. Quality: Q-Align score. NFE: denoising steps per video. Fifty trajectories per split &mdash; RealEstate10K for standard, held-out TartanAir-V2 flights for diverse.</p>
 
       <h3 class="ws-subhead">All six methods on the same flight</h3>
-      <p class="ws-caption" style="max-width: 940px; margin: 0 auto 1rem">
-        Eight further examples, four from the diverse-flight split and four from the standard split. The first column
-        shows the input FlightGrid and the prescribed flight; the six outputs are resampled to the same 9.3&nbsp;s and play in step.
-      </p>
+      <p class="ws-caption" style="max-width: 940px; margin: 0 auto .75rem">Each panel is one flight. First column: the FlightGrid all six methods were given (top), and the paths they actually flew drawn over the one they were asked for (bottom). Then the six videos, resampled to the same 9.3&nbsp;s so they play in step. Each method keeps one colour &mdash; label, border, curve:</p>
+      <p class="ws-caption ws-swatches" style="max-width:940px;margin:0 auto 1rem"><img src="static/rm/sw/prescribed.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;prescribed flight &nbsp; <img src="static/rm/sw/worldslider.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;<b>WorldSlider (ours)</b> &nbsp; <img src="static/rm/sw/worldplay.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;HY-WorldPlay &nbsp; <img src="static/rm/sw/wan.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;Wan2.1-Cam &nbsp; <img src="static/rm/sw/cameractrl.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;CameraCtrl &nbsp; <img src="static/rm/sw/motionctrl.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;MotionCtrl &nbsp; <img src="static/rm/sw/realcam.png" alt="" width="14" height="14" style="vertical-align:-2px">&nbsp;RealCam-I2V</p>
       <div class="ws-grid is-1">
-        <figure class="ws-card ws-c1v2" data-sync="diverse_CastleFortress_P000_s00735">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_CastleFortress_P000_s00735_row1.mp4" poster="static/images/appendix/c1_diverse_CastleFortress_P000_s00735_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Castle fortress: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_CastleFortress_P000_s00735_row2.mp4" poster="static/images/appendix/c1_diverse_CastleFortress_P000_s00735_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Castle fortress: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Castle fortress.</strong> TartanAir-V2. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_standard_0c4c5d5f751aabf5.mp4" poster="static/rm/c1_standard_0c4c5d5f751aabf5.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Beamed great room: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Beamed great room</strong> (RealEstate10K)</figcaption>
         </figure>
-        <figure class="ws-card ws-c1v2" data-sync="diverse_Downtown_P008_s00035">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_Downtown_P008_s00035_row1.mp4" poster="static/images/appendix/c1_diverse_Downtown_P008_s00035_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Downtown: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_Downtown_P008_s00035_row2.mp4" poster="static/images/appendix/c1_diverse_Downtown_P008_s00035_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Downtown: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Downtown.</strong> TartanAir-V2. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_standard_3825ed66b7ea932e.mp4" poster="static/rm/c1_standard_3825ed66b7ea932e.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Green-door living room: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Green-door living room</strong> (RealEstate10K)</figcaption>
         </figure>
-        <figure class="ws-card ws-c1v2" data-sync="diverse_GothicIsland_P001_s01575">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_GothicIsland_P001_s01575_row1.mp4" poster="static/images/appendix/c1_diverse_GothicIsland_P001_s01575_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Gothic island: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_GothicIsland_P001_s01575_row2.mp4" poster="static/images/appendix/c1_diverse_GothicIsland_P001_s01575_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Gothic island: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Gothic island.</strong> TartanAir-V2. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_standard_6771a51bf0cfce7f.mp4" poster="static/rm/c1_standard_6771a51bf0cfce7f.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Brick entrance: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Brick entrance</strong> (RealEstate10K)</figcaption>
         </figure>
-        <figure class="ws-card ws-c1v2" data-sync="diverse_SeasonalForestSpring_P003_s00525">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_SeasonalForestSpring_P003_s00525_row1.mp4" poster="static/images/appendix/c1_diverse_SeasonalForestSpring_P003_s00525_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Spring forest: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_diverse_SeasonalForestSpring_P003_s00525_row2.mp4" poster="static/images/appendix/c1_diverse_SeasonalForestSpring_P003_s00525_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Spring forest: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Spring forest.</strong> TartanAir-V2. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_standard_fea544b472e9abd1.mp4" poster="static/rm/c1_standard_fea544b472e9abd1.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Covered porch: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Covered porch</strong> (RealEstate10K)</figcaption>
         </figure>
-        <figure class="ws-card ws-c1v2" data-sync="standard_0c4c5d5f751aabf5">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_standard_0c4c5d5f751aabf5_row1.mp4" poster="static/images/appendix/c1_standard_0c4c5d5f751aabf5_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Beamed great room: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_standard_0c4c5d5f751aabf5_row2.mp4" poster="static/images/appendix/c1_standard_0c4c5d5f751aabf5_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Beamed great room: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Beamed great room.</strong> RealEstate10K. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_diverse_CastleFortress_P000_s00735.mp4" poster="static/rm/c1_diverse_CastleFortress_P000_s00735.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Castle fortress: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Castle fortress</strong> (TartanAir-V2)</figcaption>
         </figure>
-        <figure class="ws-card ws-c1v2" data-sync="standard_3825ed66b7ea932e">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_standard_3825ed66b7ea932e_row1.mp4" poster="static/images/appendix/c1_standard_3825ed66b7ea932e_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Green-door living room: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_standard_3825ed66b7ea932e_row2.mp4" poster="static/images/appendix/c1_standard_3825ed66b7ea932e_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Green-door living room: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Green-door living room.</strong> RealEstate10K. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_diverse_GothicIsland_P001_s01575.mp4" poster="static/rm/c1_diverse_GothicIsland_P001_s01575.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Gothic island: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Gothic island</strong> (TartanAir-V2)</figcaption>
         </figure>
-        <figure class="ws-card ws-c1v2" data-sync="standard_6771a51bf0cfce7f">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_standard_6771a51bf0cfce7f_row1.mp4" poster="static/images/appendix/c1_standard_6771a51bf0cfce7f_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Brick entrance: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_standard_6771a51bf0cfce7f_row2.mp4" poster="static/images/appendix/c1_standard_6771a51bf0cfce7f_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Brick entrance: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Brick entrance.</strong> RealEstate10K. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
-        </figure>
-        <figure class="ws-card ws-c1v2" data-sync="standard_fea544b472e9abd1">
-          <div class="ws-c1-rows">
-            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">WorldSlider (ours)</span><span>HY-WorldPlay</span><span>Wan2.1-Cam</span></div>
-            <video data-src="static/videos/appendix/c1_standard_fea544b472e9abd1_row1.mp4" poster="static/images/appendix/c1_standard_fea544b472e9abd1_row1.jpg" width="2048" height="512" muted loop playsinline aria-label="Covered porch: WorldSlider, HY-WorldPlay and Wan2.1-Cam on the same prescribed flight."></video>
-            <div class="ws-panel-labels is-4"><span>Trajectories</span><span>CameraCtrl</span><span>MotionCtrl</span><span>RealCam-I2V</span></div>
-            <video data-src="static/videos/appendix/c1_standard_fea544b472e9abd1_row2.mp4" poster="static/images/appendix/c1_standard_fea544b472e9abd1_row2.jpg" width="2048" height="512" muted loop playsinline aria-label="Covered porch: CameraCtrl, MotionCtrl and RealCam-I2V on the same prescribed flight."></video>
-            <div class="ws-c1-legend"><span class="l-pre">prescribed</span><span class="l-ws">WorldSlider</span><span class="l-wp">HY-WorldPlay</span><span class="l-wan">Wan2.1-Cam</span><span class="l-cc">CameraCtrl</span><span class="l-mc">MotionCtrl</span><span class="l-rc">RealCam-I2V</span></div>
-          </div>
-          <figcaption><strong>Covered porch.</strong> RealEstate10K. First column: the FlightGrid rendered from the prescribed flight (top) and the flight itself in black with each method&rsquo;s recovered trajectory (bottom), normalized by path length.</figcaption>
+        <figure style="max-width:800px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/c1_diverse_SeasonalForestSpring_P003_s00525.mp4" poster="static/rm/c1_diverse_SeasonalForestSpring_P003_s00525.jpg"
+            width="800" height="426" muted loop playsinline aria-label="Spring forest: the same prescribed flight generated by all six methods."></video>
+          <figcaption><strong>Spring forest</strong> (TartanAir-V2)</figcaption>
         </figure>
       </div>
-
     </div>
   </section>
 
   <!-- ==================================================================== -->
-  <!-- Application: visual diversification for flight policies              -->
+  <!-- Parallel worlds along a prescribed flight                            -->
+  <!-- ==================================================================== -->
+  <section class="section hero is-light">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Results</div>
+        <h2 class="title is-3">Parallel worlds along a prescribed flight</h2>
+        <p class="ws-caption"><sub>Paper: &sect;4.2 Parallel Worlds and Applications &middot; Appendix A.2 Parallel Worlds</sub></p>
+      </div>
+<p class="ws-lead">These two flights were written by hand rather than recorded: a falling-leaf descent and a lazy eight. Each becomes a FlightGrid once, then gets paired with different worlds in text. Only the world changes &mdash; the descent, the roll and the timing of every turn come from the shared control.</p>
+      <div class="ws-grid is-1">
+        <figure style="max-width:750px;margin-inline:auto" class="ws-card ws-c2">
+          <div class="ws-c2-traj"><img src="static/rm/worlds_fallingleaf_traj.png" alt="Prescribed flight: Falling leaf." loading="lazy"></div>
+          <div class="ws-c2-rows">
+            <div class="ws-panel-labels is-3"><span>FlightGrid</span><span class="is-ours">Office</span><span class="is-ours">Waterfront skyline</span></div>
+            <video data-src="static/rm/worlds_fallingleaf.mp4" poster="static/rm/worlds_fallingleaf.jpg"
+            width="600" height="200" muted loop playsinline aria-label="Falling leaf: one prescribed flight generated in several worlds."></video>
+          </div>
+          <figcaption><strong>Falling leaf</strong></figcaption>
+        </figure>
+        <figure style="max-width:750px;margin-inline:auto" class="ws-card ws-c2">
+          <div class="ws-c2-traj"><img src="static/rm/worlds_lazy8_traj.png" alt="Prescribed flight: Lazy eight." loading="lazy"></div>
+          <div class="ws-c2-rows">
+            <div class="ws-panel-labels is-3"><span>FlightGrid</span><span class="is-ours">Botanical dome</span><span class="is-ours">Shopping boulevard</span></div>
+            <video data-src="static/rm/worlds_lazy8.mp4" poster="static/rm/worlds_lazy8.jpg"
+            width="600" height="200" muted loop playsinline aria-label="Lazy eight: one prescribed flight generated in several worlds."></video>
+          </div>
+          <figcaption><strong>Lazy eight</strong></figcaption>
+        </figure>
+      </div>
+
+      <h3 class="ws-subhead">Further flights in three worlds each</h3>
+      <p class="ws-caption" style="max-width: 940px; margin: 0 auto 1rem">Four more flights, same idea. Left: the path. Then the FlightGrid it becomes, and three worlds generated from it &mdash; only the first frame and the text differ between them.</p>
+      <div class="ws-grid is-1">
+        <figure style="max-width:1000px;margin-inline:auto" class="ws-card ws-c2">
+          <div class="ws-c2-traj"><img src="static/rm/c2_arc_turn_traj.png" alt="Prescribed flight: Arc turn." loading="lazy"></div>
+          <div class="ws-c2-rows">
+            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Old town</span><span class="is-ours">Living room</span><span class="is-ours">Log cabin</span></div>
+            <video data-src="static/rm/c2_arc_turn.mp4" poster="static/rm/c2_arc_turn.jpg"
+            width="800" height="200" muted loop playsinline aria-label="Arc turn: one prescribed flight generated in several worlds."></video>
+          </div>
+          <figcaption><strong>Arc turn</strong></figcaption>
+        </figure>
+        <figure style="max-width:1000px;margin-inline:auto" class="ws-card ws-c2">
+          <div class="ws-c2-traj"><img src="static/rm/c2_swoop_traj.png" alt="Prescribed flight: Swoop." loading="lazy"></div>
+          <div class="ws-c2-rows">
+            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Living room</span><span class="is-ours">Retro office</span><span class="is-ours">Sewer</span></div>
+            <video data-src="static/rm/c2_swoop.mp4" poster="static/rm/c2_swoop.jpg"
+            width="800" height="200" muted loop playsinline aria-label="Swoop: one prescribed flight generated in several worlds."></video>
+          </div>
+          <figcaption><strong>Swoop</strong></figcaption>
+        </figure>
+        <figure style="max-width:1000px;margin-inline:auto" class="ws-card ws-c2">
+          <div class="ws-c2-traj"><img src="static/rm/c2_wingover_traj.png" alt="Prescribed flight: Wingover." loading="lazy"></div>
+          <div class="ws-c2-rows">
+            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Diner</span><span class="is-ours">Restaurant</span><span class="is-ours">Sewer</span></div>
+            <video data-src="static/rm/c2_wingover.mp4" poster="static/rm/c2_wingover.jpg"
+            width="800" height="200" muted loop playsinline aria-label="Wingover: one prescribed flight generated in several worlds."></video>
+          </div>
+          <figcaption><strong>Wingover</strong></figcaption>
+        </figure>
+        <figure style="max-width:1000px;margin-inline:auto" class="ws-card ws-c2">
+          <div class="ws-c2-traj"><img src="static/rm/c2_rise_and_reveal_traj.png" alt="Prescribed flight: Rise and reveal." loading="lazy"></div>
+          <div class="ws-c2-rows">
+            <div class="ws-panel-labels is-4"><span>FlightGrid (input)</span><span class="is-ours">Restaurant</span><span class="is-ours">Retro office</span><span class="is-ours">Old town</span></div>
+            <video data-src="static/rm/c2_rise_and_reveal.mp4" poster="static/rm/c2_rise_and_reveal.jpg"
+            width="800" height="200" muted loop playsinline aria-label="Rise and reveal: one prescribed flight generated in several worlds."></video>
+          </div>
+          <figcaption><strong>Rise and reveal</strong></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Trajectory-conditioned branching from a shared observation           -->
+  <!-- ==================================================================== -->
+  <section class="section">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Results</div>
+        <h2 class="title is-3">Trajectory-conditioned branching from a shared observation</h2>
+        <p class="ws-caption"><sub>Paper: &sect;4.2 Parallel Worlds and Applications</sub></p>
+      </div>
+<p class="ws-lead">Now the other way round. Both clips start from the same photo, then follow two FlightGrids that turn in different directions. Each one has to imagine a world that fits the photo, and shows only what its own turn reveals. Here the flight plays the part an action input plays in a world model.</p>
+      <p class="ws-caption" style="max-width: 940px; margin: 0 auto 1rem">Panels: shared first frame &middot; turn left (FlightGrid, generated) &middot; turn right (FlightGrid, generated).</p>
+      <div class="ws-grid is-1">
+        <figure style="max-width:1300px;margin-inline:auto" class="ws-card">
+          <div class="ws-panel-labels is-5"><span>Shared first frame</span><span>Turn left: FlightGrid</span><span class="is-ours">Turn left: generated</span><span>Turn right: FlightGrid</span><span class="is-ours">Turn right: generated</span></div>
+          <video data-src="static/rm/fork_traffic_seasia_street.mp4" poster="static/rm/fork_traffic_seasia_street.jpg"
+            width="1300" height="260" muted loop playsinline aria-label="Street scene: two flights diverging in heading from one shared observation."></video>
+          <figcaption><strong>Street scene</strong> &mdash; divergent headings from a single street-level observation.</figcaption>
+        </figure>
+        <figure style="max-width:1300px;margin-inline:auto" class="ws-card">
+          <div class="ws-panel-labels is-5"><span>Shared first frame</span><span>Turn left: FlightGrid</span><span class="is-ours">Turn left: generated</span><span>Turn right: FlightGrid</span><span class="is-ours">Turn right: generated</span></div>
+          <video data-src="static/rm/fork_restaurant.mp4" poster="static/rm/fork_restaurant.jpg"
+            width="1300" height="260" muted loop playsinline aria-label="Restaurant interior: two flights diverging in heading from one shared observation."></video>
+          <figcaption><strong>Restaurant interior</strong> &mdash; divergent headings from a single interior observation.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Visual diversification for flight policies                           -->
   <!-- ==================================================================== -->
   <section class="section hero is-light">
     <div class="ws-wide is-xwide">
       <div class="ws-section-head">
         <div class="ws-kicker">Application</div>
         <h2 class="title is-3">Visual diversification for flight policies</h2>
+        <p class="ws-caption"><sub>Paper: &sect;4.2 Parallel Worlds and Applications &middot; Appendix A.3 Visual Diversification</sub></p>
       </div>
-
-      <p class="ws-lead">
-        Because a parallel world preserves the trajectory that generated it, the action labels of the
-        source flight remain valid in the synthesized video. Simulator domain randomization varies
-        illumination, gate appearance and background; WorldSlider instead generates complete,
-        task-consistent environments around a fixed flight, which we term <em>visual
-        diversification</em>. It expands coherent policy experience without constructing and rendering
-        each training environment by hand. In Isaac Sim we build a three-gate direct course, a
-        three-gate loop and a four-gate direct course, and collect 20 expert trajectories per course.
-        An imitation-learning policy maps egocentric RGB observations to short waypoint sequences
-        executed by a low-level controller; its architecture, trajectory labels and training budget
-        are held fixed while only the observations vary. The original condition repeats each
-        demonstration ten times; simulator randomization and WorldSlider instead provide ten visual
-        variants of every demonstration, so every condition trains on 200 sequences per course with
-        identical trajectory supervision. For every condition and course, five policies are each
-        evaluated over 20 rollouts, and a rollout succeeds only if all gates are traversed without
-        collision. WorldSlider attains the highest success rate throughout and exceeds simulator
-        randomization by 28 percentage points on the three-gate loop course.
-      </p>
-
+<p class="ws-lead">A generated world keeps the flight, so the control actions recorded with the original video still describe it. We used that to train gate-racing policies in Isaac Sim. Every condition sees the same demonstrations and the same training budget; only the images differ &mdash; the original recording, simulator randomization, or a WorldSlider world. Policies trained on our worlds win on all three courses, by 28 points on the hardest.</p>
       <figure class="ws-figure is-narrow" style="--ws-max: 800px">
-        <img src="static/images/flight_policy.png" width="2390" height="739"
-          alt="Three panels. (a) A quadrotor threading three square gates along a dotted path. (b) Success rate per course for policies trained on original, simulator-randomized and WorldSlider observations; WorldSlider is highest on every course and the margin widens on the four-gate course. (c) Six gate scenes generated from the same flight: meadow, desert, park, seashore, plaza and a lake." />
-        <figcaption class="ws-caption" style="margin-top: .75rem">
-          <strong>Visual diversification for gate traversal.</strong> (a) Gate traversal. (b) Policy
-          success under the three training conditions. (c) Task-consistent worlds generated from the
-          same flight.
-        </figcaption>
+        <img src="static/rm/flight_policy.png" alt="Gate traversal, policy success under the three training conditions, and task-consistent worlds generated from the same flight." loading="lazy">
+        <figcaption class="ws-caption" style="margin-top:.75rem">(a) Gate traversal. (b) Policy success under the three training conditions. (c) Task-consistent worlds generated from the same flight.</figcaption>
       </figure>
 
       <h3 class="ws-subhead">Policy rollouts</h3>
-      <div class="ws-carousel is-narrow ws-figure" style="--ws-max: 500px" data-carousel aria-roledescription="carousel"
-        aria-label="Policy rollouts, one course at a time">
-        <div class="ws-carousel-viewport">
-          <div class="ws-carousel-track">
-            <figure class="ws-slide">
-              <video data-src="static/videos/policy/3gate_direct.mp4" poster="static/images/policy/3gate_direct.jpg"
-                width="1528" height="820" muted loop playsinline
-                aria-label="Policy rollout on the three-gate direct course."></video>
-              <figcaption><strong>Three-gate direct course.</strong></figcaption>
-            </figure>
-            <figure class="ws-slide">
-              <video data-src="static/videos/policy/3gate_loop.mp4" poster="static/images/policy/3gate_loop.jpg"
-                width="1528" height="820" muted loop playsinline
-                aria-label="Policy rollout on the three-gate loop course."></video>
-              <figcaption><strong>Three-gate loop course.</strong></figcaption>
-            </figure>
-            <figure class="ws-slide">
-              <video data-src="static/videos/policy/4gate_direct.mp4" poster="static/images/policy/4gate_direct.jpg"
-                width="1528" height="820" muted loop playsinline
-                aria-label="Policy rollout on the four-gate direct course."></video>
-              <figcaption><strong>Four-gate direct course.</strong></figcaption>
-            </figure>
-          </div>
-        </div>
-        <button type="button" class="ws-carousel-btn is-prev" aria-label="Previous course">&lsaquo;</button>
-        <button type="button" class="ws-carousel-btn is-next" aria-label="Next course">&rsaquo;</button>
-        <div class="ws-carousel-nav" role="tablist">
-          <button type="button" class="ws-tab is-active">3-Gate Direct</button>
-          <button type="button" class="ws-tab">3-Gate Loop</button>
-          <button type="button" class="ws-tab">4-Gate Direct</button>
-        </div>
+      <div class="ws-grid is-3">
+        <figure style="max-width:372px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/policy_3gate_direct.mp4" poster="static/rm/policy_3gate_direct.jpg"
+            width="372" height="200" muted loop playsinline aria-label="Policy rollout on the 3-gate direct course."></video>
+          <figcaption><strong>3-gate direct course.</strong></figcaption>
+        </figure>
+        <figure style="max-width:372px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/policy_3gate_loop.mp4" poster="static/rm/policy_3gate_loop.jpg"
+            width="372" height="200" muted loop playsinline aria-label="Policy rollout on the 3-gate loop course."></video>
+          <figcaption><strong>3-gate loop course.</strong></figcaption>
+        </figure>
+        <figure style="max-width:372px;margin-inline:auto" class="ws-card">
+          <video data-src="static/rm/policy_4gate_direct.mp4" poster="static/rm/policy_4gate_direct.jpg"
+            width="372" height="200" muted loop playsinline aria-label="Policy rollout on the 4-gate direct course."></video>
+          <figcaption><strong>4-gate direct course.</strong></figcaption>
+        </figure>
       </div>
 
       <h3 class="ws-subhead">Diversified gate flights</h3>
-      <p class="ws-caption" style="max-width: 940px; margin: 0 auto 1rem">
-        Recorded gate flights re-rendered in new worlds from an edited first frame, with the gate
-        geometry and the flight preserved. Each clip plays the original recording beside its
-        diversified counterpart, frame-aligned.
-      </p>
+      <p class="ws-caption" style="max-width: 940px; margin: 0 auto 1rem">The training images themselves. Left: a recorded gate flight. Right: the same flight re-rendered somewhere else, frame for frame. The gates stay where they were, so the recorded actions still match what the drone does.</p>
       <div class="ws-grid is-2">
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Underground parking garage</span></div>
-          <video data-src="static/videos/diversify/c3_underground_parking_garage.mp4" poster="static/images/diversify/c3_underground_parking_garage.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into underground parking garage."></video>
+          <video data-src="static/rm/c3_underground_parking_garage.mp4" poster="static/rm/c3_underground_parking_garage.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into underground parking garage."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Container port at night</span></div>
-          <video data-src="static/videos/diversify/c3_container_port_at_night.mp4" poster="static/images/diversify/c3_container_port_at_night.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into container port at night."></video>
+          <video data-src="static/rm/c3_container_port_at_night.mp4" poster="static/rm/c3_container_port_at_night.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into container port at night."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Spring wildflower meadow</span></div>
-          <video data-src="static/videos/diversify/c3_spring_wildflower_meadow.mp4" poster="static/images/diversify/c3_spring_wildflower_meadow.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into spring wildflower meadow."></video>
+          <video data-src="static/rm/c3_spring_wildflower_meadow.mp4" poster="static/rm/c3_spring_wildflower_meadow.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into spring wildflower meadow."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Rainy autumn plaza</span></div>
-          <video data-src="static/videos/diversify/c3_rainy_autumn_plaza.mp4" poster="static/images/diversify/c3_rainy_autumn_plaza.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into rainy autumn plaza."></video>
+          <video data-src="static/rm/c3_rainy_autumn_plaza.mp4" poster="static/rm/c3_rainy_autumn_plaza.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into rainy autumn plaza."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Tropical terrace after rain</span></div>
-          <video data-src="static/videos/diversify/c3_tropical_terrace_after_rain.mp4" poster="static/images/diversify/c3_tropical_terrace_after_rain.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into tropical terrace after rain."></video>
+          <video data-src="static/rm/c3_tropical_terrace_after_rain.mp4" poster="static/rm/c3_tropical_terrace_after_rain.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into tropical terrace after rain."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Snowy field under a full moon</span></div>
-          <video data-src="static/videos/diversify/c3_snowy_field_under_a_full_moon.mp4" poster="static/images/diversify/c3_snowy_field_under_a_full_moon.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into snowy field under a full moon."></video>
+          <video data-src="static/rm/c3_snowy_field_under_a_full_moon.mp4" poster="static/rm/c3_snowy_field_under_a_full_moon.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into snowy field under a full moon."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Aircraft hangar</span></div>
-          <video data-src="static/videos/diversify/c3_aircraft_hangar.mp4" poster="static/images/diversify/c3_aircraft_hangar.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into aircraft hangar."></video>
+          <video data-src="static/rm/c3_aircraft_hangar.mp4" poster="static/rm/c3_aircraft_hangar.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into aircraft hangar."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Misty bamboo forest</span></div>
-          <video data-src="static/videos/diversify/c3_misty_bamboo_forest.mp4" poster="static/images/diversify/c3_misty_bamboo_forest.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into misty bamboo forest."></video>
+          <video data-src="static/rm/c3_misty_bamboo_forest.mp4" poster="static/rm/c3_misty_bamboo_forest.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into misty bamboo forest."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Running track at night</span></div>
-          <video data-src="static/videos/diversify/c3_running_track_at_night.mp4" poster="static/images/diversify/c3_running_track_at_night.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into running track at night."></video>
+          <video data-src="static/rm/c3_running_track_at_night.mp4" poster="static/rm/c3_running_track_at_night.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into running track at night."></video>
         </figure>
-        <figure class="ws-card">
+        <figure style="max-width:400px;margin-inline:auto" class="ws-card">
           <div class="ws-panel-labels is-2"><span>Original</span><span class="is-ours">Cherry-blossom park</span></div>
-          <video data-src="static/videos/diversify/c3_cherry_blossom_park.mp4" poster="static/images/diversify/c3_cherry_blossom_park.jpg"
-            width="1024" height="512" muted loop playsinline
-            aria-label="Recorded gate flight beside the same flight diversified into cherry-blossom park."></video>
+          <video data-src="static/rm/c3_cherry_blossom_park.mp4" poster="static/rm/c3_cherry_blossom_park.jpg"
+            width="400" height="200" muted loop playsinline aria-label="Recorded gate flight beside the same flight diversified into cherry-blossom park."></video>
         </figure>
       </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
+  <!-- Code                                                                 -->
+  <!-- ==================================================================== -->
+  <section class="section">
+    <div class="ws-wide is-xwide">
+      <div class="ws-section-head">
+        <div class="ws-kicker">Release</div>
+        <h2 class="title is-3">Code</h2>
+        <p class="ws-caption"><sub>Paper: &sect;3 Method</sub></p>
+      </div>
+<p class="ws-lead">The code release: the FlightGrid renderer, the hook that feeds it into Cosmos-Transfer2.5, the three training stages, the geometry reward and a generation script &mdash; in <a href="https://github.com/NUS-CORE/worldslider" target="_blank" rel="noopener">the repository</a>. Turning a pose file into a FlightGrid needs only NumPy, OpenCV and ffmpeg:</p>
+      <pre class="ws-code"><code>python -m worldslider.flightgrid.render poses.txt flightgrid.mp4 --fov 90 --fps 10 --frames 93</code></pre>
     </div>
   </section>
 
